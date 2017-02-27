@@ -63,6 +63,11 @@ public class main extends javax.swing.JFrame {
         Btn_signup.setBackground(new java.awt.Color(102, 255, 102));
         Btn_signup.setFont(new java.awt.Font("LSTKClarendon", 1, 18)); // NOI18N
         Btn_signup.setText("Sign Up");
+        Btn_signup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_signupActionPerformed(evt);
+            }
+        });
 
         Btn_login.setText("Log In");
         Btn_login.addActionListener(new java.awt.event.ActionListener() {
@@ -131,12 +136,20 @@ public class main extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_loginActionPerformed
         // TODO add your handling code here:
+        this.dispose();
         new login().setVisible(true);
     }//GEN-LAST:event_Btn_loginActionPerformed
+
+    private void Btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_signupActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new signup().setVisible(true);
+    }//GEN-LAST:event_Btn_signupActionPerformed
 
     /**
      * @param args the command line arguments

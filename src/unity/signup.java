@@ -5,16 +5,22 @@
  */
 package unity;
 
-/**
- *
- * @author supark
- */
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 public class signup extends javax.swing.JFrame {
 
-    /**
-     * Creates new form signup
-     */
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    
+    PreparedStatement pst2 = null;
+    
     public signup() {
+        con = connsql.ConnecrDB();
         initComponents();
     }
 
@@ -32,9 +38,11 @@ public class signup extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        getemail = new javax.swing.JTextField();
+        getpw = new javax.swing.JPasswordField();
+        Btn_sign = new javax.swing.JButton();
+        NICKNAME = new javax.swing.JLabel();
+        nickname = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -60,7 +68,32 @@ public class signup extends javax.swing.JFrame {
 
         jLabel3.setText("PASSWORD:");
 
-        jButton1.setText("Sign Up");
+        getemail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getemailActionPerformed(evt);
+            }
+        });
+
+        getpw.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                getpwKeyPressed(evt);
+            }
+        });
+
+        Btn_sign.setText("Sign Up");
+        Btn_sign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_signActionPerformed(evt);
+            }
+        });
+
+        NICKNAME.setText("NICKNAME:");
+
+        nickname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nicknameKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -75,15 +108,19 @@ public class signup extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(NICKNAME)
+                                .addGap(18, 18, 18)
+                                .addComponent(nickname))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(getemail, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addComponent(jPasswordField1))))))
+                                    .addComponent(Btn_sign)
+                                    .addComponent(getpw))))))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -94,13 +131,17 @@ public class signup extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(getemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                    .addComponent(getpw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NICKNAME)
+                    .addComponent(nickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(Btn_sign)
                 .addGap(16, 16, 16))
         );
 
@@ -116,7 +157,103 @@ public class signup extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void getemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getemailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getemailActionPerformed
+
+    private void Btn_signActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_signActionPerformed
+        // TODO add your handling code here:
+        String mail = getemail.getText();
+        String pass = getpw.getText();
+        
+        try {
+            String query = "Select gsuemail, pw, nicknam from log ";
+            pst = con.prepareStatement(query);
+            rs = pst.executeQuery();
+            
+            if(mail.equals(rs.getString("gsuemail"))) {
+                JOptionPane.showMessageDialog(null, "it's already existed");
+            } 
+            if(mail != (rs.getString("gsuemail"))) {
+                if(!mail.contains("student.gsu.edu")){
+                    JOptionPane.showMessageDialog(null, "email should be gsuemail");
+                }
+                else {
+                String query2 = "insert into log (gsuemail, pw, nicknam) values (?, ?, ?);";
+                pst2 = con.prepareStatement(query2);
+                pst2.setString(1, getemail.getText());
+                pst2.setString(2, getpw.getText());
+                pst2.setString(3, nickname.getText());
+                pst2.execute();
+                JOptionPane.showMessageDialog(null, "successfully signed up");
+                this.dispose();
+                pst2.close();
+                }
+            }
+            
+            else {
+                JOptionPane.showMessageDialog(null, " failed");
+                dispose();
+            }
+            pst.close();
+            rs.close();
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_Btn_signActionPerformed
+
+    private void getpwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_getpwKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_getpwKeyPressed
+
+    private void nicknameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nicknameKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String mail = getemail.getText();
+            
+        
+        try {
+            String query = "Select gsuemail, pw, nicknam from log ";
+            pst = con.prepareStatement(query);
+            rs = pst.executeQuery();
+            
+            if(mail.equals(rs.getString("gsuemail"))) {
+                JOptionPane.showMessageDialog(null, "it's already existed");
+            } 
+            if(mail != (rs.getString("gsuemail"))) {
+                if(!mail.contains("student.gsu.edu")){
+                    JOptionPane.showMessageDialog(null, "email should be gsuemail");
+                }
+                else {
+                String query2 = "insert into log (gsuemail, pw, nicknam) values (?, ?, ?);";
+                pst2 = con.prepareStatement(query2);
+                pst2.setString(1, getemail.getText());
+                pst2.setString(2, getpw.getText());
+                pst2.setString(3, nickname.getText());
+                pst2.execute();
+                JOptionPane.showMessageDialog(null, "successfully signed up");
+                this.dispose();
+                pst2.close();
+                }
+            }
+            
+            else {
+                JOptionPane.showMessageDialog(null, " failed");
+                dispose();
+            }
+            pst.close();
+            rs.close();
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        }
+    }//GEN-LAST:event_nicknameKeyPressed
 
     /**
      * @param args the command line arguments
@@ -154,13 +291,15 @@ public class signup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Btn_sign;
+    private javax.swing.JLabel NICKNAME;
+    private javax.swing.JTextField getemail;
+    private javax.swing.JPasswordField getpw;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField nickname;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package unity;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,14 +76,30 @@ public class login extends javax.swing.JFrame {
 
         jLabel4.setText("PASSWORD:");
 
+        pwTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pwTFKeyPressed(evt);
+            }
+        });
+
         Btn_log.setText("LOG IN");
         Btn_log.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_logActionPerformed(evt);
             }
         });
+        Btn_log.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_logKeyPressed(evt);
+            }
+        });
 
         jButton2.setText("FORGOT PASSWORD");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,28 +170,91 @@ public class login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_logActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_logActionPerformed
         // TODO add your handling code here:
         String pass = pwTF.getText();
+        String mail = emailTF.getText();
         try {
-            String query = "Select gsuemail, pw from log ";
+            String query = "Select * from log where gsuemail=? and pw=? ";
             pst = con.prepareStatement(query);
+            pst.setString(1, emailTF.getText());
+            pst.setString(2, pwTF.getText());
             rs = pst.executeQuery();
+            int count = 0;
             
-            if(pass.equals(rs.getString("pw"))) {
-                JOptionPane.showMessageDialog(null, "Login sucessfully");
+            while(rs.next()){
+                count = count +1;
             }
+            if(count == 1) {
+                JOptionPane.showMessageDialog(null, "username and password is correct");
+                this.dispose();
+                
+                
+            }
+            
             else {
-                JOptionPane.showMessageDialog(null, "Login failed");
-                dispose();
+                JOptionPane.showMessageDialog(null, "username or password is not correct. try again");
             }
+            
+            pst.close();
+            rs.close();
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
+        
     }//GEN-LAST:event_Btn_logActionPerformed
+
+    private void Btn_logKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_logKeyPressed
+        // TODO add your handling code here:
+       
+        
+    }//GEN-LAST:event_Btn_logKeyPressed
+
+    private void pwTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwTFKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String pass = pwTF.getText();
+            String mail = emailTF.getText();
+        try {
+            String query = "Select * from log where gsuemail=? and pw=? ";
+            pst = con.prepareStatement(query);
+            pst.setString(1, emailTF.getText());
+            pst.setString(2, pwTF.getText());
+            rs = pst.executeQuery();
+            int count = 0;
+            
+            while(rs.next()){
+                count = count +1;
+            }
+            if(count == 1) {
+                JOptionPane.showMessageDialog(null, "username and password is correct");
+                this.dispose();
+                
+                
+            }
+            
+            else {
+                JOptionPane.showMessageDialog(null, "username or password is not correct. try again");
+            }
+            
+            pst.close();
+            rs.close();
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        }
+    }//GEN-LAST:event_pwTFKeyPressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new forgotpw().setVisible(true);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
