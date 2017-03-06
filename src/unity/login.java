@@ -191,7 +191,7 @@ public class login extends javax.swing.JFrame {
             if(count == 1) {
                 JOptionPane.showMessageDialog(null, "username and password is correct");
                 this.dispose();
-                
+                new afterLogMain().setVisible(true);
                 
             }
             

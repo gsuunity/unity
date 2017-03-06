@@ -41,7 +41,7 @@ public class main extends javax.swing.JFrame {
         }
     }
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -191,25 +191,25 @@ public class main extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void Btn_loginActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void Btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_loginActionPerformed
         // TODO add your handling code here:
         this.dispose();
         new login().setVisible(true);
-    }                                         
+    }//GEN-LAST:event_Btn_loginActionPerformed
 
-    private void Btn_signupActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void Btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_signupActionPerformed
         // TODO add your handling code here:
         this.dispose();
         new signup().setVisible(true);
-    }                                          
+    }//GEN-LAST:event_Btn_signupActionPerformed
 
-    private void mainTableMousePressed(java.awt.event.MouseEvent evt) {                                       
+    private void mainTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMousePressed
         // TODO add your handling code here:
         int row = mainTable.getSelectedRow();
         //new blahblah~~~
-    }                                      
+    }//GEN-LAST:event_mainTableMousePressed
 
     /**
      * @param args the command line arguments
@@ -246,7 +246,7 @@ public class main extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_login;
     private javax.swing.JButton Btn_signup;
     private javax.swing.JButton jButton3;
@@ -257,5 +257,5 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable mainTable;
-    // End of variables declaration                   
+    // End of variables declaration//GEN-END:variables
 }

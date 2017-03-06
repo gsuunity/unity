@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 
@@ -21,6 +22,7 @@ public class forgotpw extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    
     
     public forgotpw() {
         con = connsql.ConnecrDB();
@@ -136,7 +138,34 @@ public class forgotpw extends javax.swing.JFrame {
     private void nicknKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nicknKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try { 
+            String query = "Select * from log where gsuemail=? and nicknam=? ";
+            pst = con.prepareStatement(query);
+            pst.setString(1, emailaddress.getText());
+            pst.setString(2, nickn.getText());
+            rs = pst.executeQuery();
+            int count = 0;
+            String pass = "";
             
+            while(rs.next()){
+                count = count +1;
+                pass = rs.getString("pw");
+            }
+            if(count == 1) {   
+                JOptionPane.showMessageDialog(null,  "your password is " + pass);
+                this.dispose();              
+            }
+            
+            else {
+                JOptionPane.showMessageDialog(null, "email or nickname is not correct. try again");
+            }
+            
+            pst.close();
+            rs.close();
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
             
         }
         
@@ -145,22 +174,23 @@ public class forgotpw extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
 // TODO add your handling code here:
-            String emailadd = emailaddress.getText();
-            String nic = nickn.getText();
-            try {
-            String query = "Select gsuemail, nicknam from log";
+            
+            try { 
+            String query = "Select * from log where gsuemail=? and nicknam=? ";
             pst = con.prepareStatement(query);
             pst.setString(1, emailaddress.getText());
             pst.setString(2, nickn.getText());
             rs = pst.executeQuery();
             int count = 0;
+            String pass = "";
             
             while(rs.next()){
                 count = count +1;
+                pass = rs.getString("pw");
             }
-            if(count == 1) {
-                JOptionPane.showMessageDialog(null, "ok");
-                
+            if(count == 1) {   
+                JOptionPane.showMessageDialog(null,  "your password is " + pass);
+                this.dispose();              
             }
             
             else {
