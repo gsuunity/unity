@@ -191,6 +191,7 @@ public class signup extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "successfully signed up");
                 this.dispose();
                 pst2.close();
+                new login().setVisible(true);
                 }
             }
             

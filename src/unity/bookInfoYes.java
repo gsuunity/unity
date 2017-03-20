@@ -137,12 +137,12 @@ public class bookInfoYes extends javax.swing.JFrame {
         String des = descArea.getText();
         
         try {
-            String query = "Select condition, price, desc from openInventory ";
+            String query = "Select condition, price, desc from openInventory3 ";
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
             
             
-                String query2 = "insert into openInventory (condition, price, desc) values (?, ?, ?);";
+                String query2 = "insert into openInventory3 (condition, price, desc) values (?, ?, ?);";
                 pst2 = con.prepareStatement(query2);
                 pst2.setString(1, conditionField.getText());
                 pst2.setString(2, priceField.getText());

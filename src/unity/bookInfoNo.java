@@ -225,6 +225,8 @@ public class bookInfoNo extends javax.swing.JFrame {
         String conditio = conditionField.getText();
         String pric = priceField.getText();
         String des = descArea.getText();
+        
+        String to = login.getValue();
          
         try {
             
@@ -246,17 +248,18 @@ public class bookInfoNo extends javax.swing.JFrame {
                 pst.close();
                 rs.close();
             
-            String query3 = "Select condition, price, desc, isbn from openInventory ";
+            String query3 = "Select condition, price, desc, isbn, seller from openInventory3 ";
             pst4 = con.prepareStatement(query3);
             rs2 = pst4.executeQuery();
             
             
-                String query4 = "insert into openInventory (condition, price, desc, isbn) values (?, ?, ?, ?);";
+                String query4 = "insert into openInventory3 (condition, price, desc, isbn, seller) values (?, ?, ?, ?, ?);";
                 pst3 = con.prepareStatement(query4);
                 pst3.setString(1, conditionField.getText());
                 pst3.setString(2, priceField.getText());
                 pst3.setString(3, descArea.getText());
                 pst3.setString(4, isbnField.getText());
+                pst3.setString(5, to);
                 pst3.execute();            
                 pst3.close();
              
@@ -265,7 +268,8 @@ public class bookInfoNo extends javax.swing.JFrame {
             rs2.close();
             
             this.dispose();
-                new myAccount().setVisible(true);
+            JOptionPane.showMessageDialog(null, "Successfully added inventory" );
+            new myAccount().setVisible(true);
             
         }
         catch (Exception e){

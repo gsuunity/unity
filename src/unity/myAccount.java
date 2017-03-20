@@ -5,17 +5,44 @@
  */
 package unity;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author supark
  */
 public class myAccount extends javax.swing.JFrame {
 
-    /**
-     * Creates new form myAccount
-     */
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    private static String gettingISBNValue = "";
+    
     public myAccount() {
         initComponents();
+        con = connsql.ConnecrDB();
+        fetch();
+    }
+public void fetch() {
+    String to = login.getValue();  //This value is login ID
+        System.out.println(to);
+        
+        try{ 
+            String q = "SELECT isbn, price, condition, desc FROM openInventory3 WHERE seller= '"+to+"' ";
+            pst = con.prepareStatement(q);
+            rs = pst.executeQuery();
+            
+            openInvenTable.setModel(DbUtils.resultSetToTableModel(rs));
+            pst.close();
+            rs.close();
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     /**
@@ -37,7 +64,7 @@ public class myAccount extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        openInvenTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -99,29 +126,69 @@ public class myAccount extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logOutBtn)
                     .addComponent(jButton2)
                     .addComponent(sellBookBtn)
-                    .addComponent(homeBtn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(homeBtn)))
         );
 
         jLabel1.setText("Selling Books : ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        openInvenTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        openInvenTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                openInvenTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(openInvenTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -188,12 +255,12 @@ public class myAccount extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -207,6 +274,7 @@ public class myAccount extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void sellBookBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sellBookBtnMouseClicked
@@ -216,7 +284,7 @@ public class myAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_sellBookBtnMouseClicked
 
     private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
-       this.dispose();
+        this.dispose();
         new firstPage().setVisible(true);
 
     }//GEN-LAST:event_logOutBtnMouseClicked
@@ -226,6 +294,18 @@ public class myAccount extends javax.swing.JFrame {
         new afterLogMain().setVisible(true);
     }//GEN-LAST:event_homeBtnMouseClicked
 
+    private void openInvenTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openInvenTableMouseClicked
+        int row = openInvenTable.getSelectedRow();     
+        String to =openInvenTable.getModel().getValueAt(row, 0).toString();
+        gettingISBNValue = to;
+       
+        this.dispose();
+        new viewDetailFromMyAccSell().setVisible(true);
+    }//GEN-LAST:event_openInvenTableMouseClicked
+    
+    public static String getValue() {
+        return gettingISBNValue;
+    }
     /**
      * @param args the command line arguments
      */
@@ -272,10 +352,10 @@ public class myAccount extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JButton logOutBtn;
+    private javax.swing.JTable openInvenTable;
     private javax.swing.JButton sellBookBtn;
     // End of variables declaration//GEN-END:variables
 }

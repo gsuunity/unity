@@ -20,6 +20,7 @@ public class login extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    private static String gettingGsuEmail = ""; 
     
     public login() {
         con = connsql.ConnecrDB();
@@ -191,6 +192,7 @@ public class login extends javax.swing.JFrame {
             if(count == 1) {
                 JOptionPane.showMessageDialog(null, "username and password is correct");
                 this.dispose();
+                gettingGsuEmail = mail;
                 new afterLogMain().setVisible(true);
                 
             }
@@ -208,6 +210,12 @@ public class login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_Btn_logActionPerformed
 
+    public static String getValue() {
+        String[] parts = gettingGsuEmail.split("@");
+        gettingGsuEmail = parts[0];
+        return gettingGsuEmail;
+    }
+    
     private void Btn_logKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_logKeyPressed
         // TODO add your handling code here:
        
