@@ -193,7 +193,7 @@ public class login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "username and password is correct");
                 this.dispose();
                 gettingGsuEmail = mail;
-                new afterLogMain().setVisible(true);
+                new afterLogMain1().setVisible(true);
                 
             }
             

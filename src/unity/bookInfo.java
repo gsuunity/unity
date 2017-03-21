@@ -27,49 +27,47 @@ public class bookInfo extends javax.swing.JFrame {
         fetch();
     }
     public void fetch() {
-    String too = displayBookInfo.getValue();
+    int too = displayABookAfterLogin.getValue();
         System.out.println(too);
         
         
         try{
-            String query = "select title, author, edition from inventory where isbn= 'too'";
-            //create not match isbn
+            String query = "select inventory.isbn, inventory.title, inventory.author, "
+                    + "inventory.edition, openInventory3.price, openInventory3.condition, openInventory3.desc, "
+                    + "openInventory3.seller from inventory, openInventory3 where inventory.isbn="+ too + 
+                    " AND openInventory3.isbn=" + too;
+            
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
             
             if(rs.next()) {
-                
+                int isb = rs.getInt("isbn"); 
                 String titl = rs.getString("title");
                 String autho = rs.getString("author");
                 int editio = rs.getInt("edition");
                 
+                isbnField.setText("" + isb);  
                 titleField.setText(titl);
                 editionField.setText(""+editio);  //editio data type is integer so add ""
                 authorField.setText(autho);
                 
-            }
-            
-            String q = "select isbn, price, condition, desc, seller from openInventory3 where isbn= 'too'";
-            pst = con.prepareStatement(q);
-            rs = pst.executeQuery();
-            
-            if(rs.next()) {
-                
-                String conditio = rs.getString("condition");
-                String des = rs.getString("desc");
-                int isb = rs.getInt("isbn");
                 double pric = rs.getDouble("price");
+                String conditio = rs.getString("condition");
+                String des = rs.getString("desc");          
                 String selle = rs.getString("seller");
                 
-                conditionField.setText(conditio);
-                isbnField.setText("" + isb);  
-                sellerField.setText(selle);
-                descArea.setText(des);
-                priceField.setText(""+ pric);
                 
-            }
+                priceField.setText(""+ pric);
+                conditionField.setText(conditio);
+                descArea.setText(des);
+                
+                sellerField.setText(selle);
+                
+            } 
+            
             pst.close();
             rs.close();
+           
         }
         catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -179,22 +177,16 @@ public class bookInfo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(conditionField, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel6))
                                 .addGap(34, 34, 34)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sellerField, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sellerField, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(269, 269, 269)
                                 .addComponent(addCartBtn))
@@ -220,8 +212,11 @@ public class bookInfo extends javax.swing.JFrame {
                         .addComponent(authorField, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
@@ -324,7 +319,7 @@ public class bookInfo extends javax.swing.JFrame {
 
     private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
         this.dispose();
-        new afterLogMain().setVisible(true);
+        new afterLogMain1().setVisible(true);
     }//GEN-LAST:event_homeBtnMouseClicked
 
     /**

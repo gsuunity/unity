@@ -291,7 +291,7 @@ public void fetch() {
 
     private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
         this.dispose();
-        new afterLogMain().setVisible(true);
+        new afterLogMain1().setVisible(true);
     }//GEN-LAST:event_homeBtnMouseClicked
 
     private void openInvenTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openInvenTableMouseClicked
@@ -300,7 +300,7 @@ public void fetch() {
         gettingISBNValue = to;
        
         this.dispose();
-        new viewDetailFromMyAccSell().setVisible(true);
+        new displayBookInfoWOLogin().setVisible(true);
     }//GEN-LAST:event_openInvenTableMouseClicked
     
     public static String getValue() {

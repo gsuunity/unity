@@ -18,8 +18,7 @@ public class viewDetailFromMyAccSell extends javax.swing.JFrame {
 Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    ResultSet rs2 = null;
-    PreparedStatement pst2 = null;
+    
     
     public viewDetailFromMyAccSell() {
         initComponents();
@@ -30,14 +29,15 @@ Connection con = null;
     String too = myAccount.getValue();
     Integer is = Integer.valueOf(too);
     
-        System.out.println("too:" + is);
+        //System.out.println("too:" + is);
         
         
-        try{
-
-            String query = "select isbn, title, author, edition from inventory where isbn="+ is
-                    + " UNION SELECT price, condition, desc, seller from openInventory3 where isbn="+ is;
-            //create not match isbn
+        try{ 
+            String query = "select inventory.isbn, inventory.title, inventory.author, "
+                    + "inventory.edition, openInventory3.price, openInventory3.condition, openInventory3.desc, "
+                    + "openInventory3.seller from inventory, openInventory3 where inventory.isbn="+ is + 
+                    " AND openInventory3.isbn=" + is;
+            
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
             
@@ -64,34 +64,11 @@ Connection con = null;
                 
                 sellerField.setText(selle);
                 
-            }
+            } 
             
-            
-            /*String q = "select price, condition, desc, isbn, seller from openInventory3 where isbn="+ too ;
-            pst2 = con.prepareStatement(q);
-            rs2 = pst2.executeQuery();
-            
-            while(rs2.next()) {
-                
-                double pric = rs.getDouble("price");
-                String conditio = rs.getString("condition");
-                String des = rs.getString("desc");
-                int isb = rs.getInt("isbn");          
-                String selle = rs.getString("seller");
-                
-                priceField.setText(""+ pric);
-                conditionField.setText(conditio);
-                descArea.setText(des);
-                isbnField.setText("" + isb);  
-                sellerField.setText(selle);
-                
-                
-                
-            }*/
             pst.close();
             rs.close();
-            //pst2.close();
-            //rs2.close();
+           
         }
         catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -313,7 +290,7 @@ Connection con = null;
 
     private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
         this.dispose();
-        new afterLogMain().setVisible(true);
+        new afterLogMain1().setVisible(true);
     }//GEN-LAST:event_homeBtnMouseClicked
 
     private void myAcctBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myAcctBtnMouseClicked

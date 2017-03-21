@@ -18,6 +18,8 @@ public class askIsbn extends javax.swing.JFrame {
 Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    private static int getIsbn; 
+     static String isbn_field = "";
     
     public askIsbn() {
         con = connsql.ConnecrDB();
@@ -106,7 +108,7 @@ Connection con = null;
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        String isbn_field = isbnField.getText();
+        isbn_field = isbnField.getText();
         try {
             
             String query = "select isbn from inventory where isbn=?";
@@ -142,6 +144,11 @@ Connection con = null;
         
     }//GEN-LAST:event_jButton1MouseClicked
 
+    public static int getValue() {
+        getIsbn = Integer.valueOf(isbn_field);
+        return getIsbn;
+    }
+    
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
         // TODO add your handling code here:
         

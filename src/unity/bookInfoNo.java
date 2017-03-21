@@ -215,7 +215,9 @@ public class bookInfoNo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
+        int isbn = askIsbn.getValue();
+        isbnField.setText("" + isbn);
+        
         String isb = isbnField.getText();
         String titl = titleField.getText();
         String editio = editionField.getText();
@@ -229,6 +231,7 @@ public class bookInfoNo extends javax.swing.JFrame {
         String to = login.getValue();
          
         try {
+            
             
             String query = "Select isbn, title, author, edition, date from inventory ";
             pst = con.prepareStatement(query);

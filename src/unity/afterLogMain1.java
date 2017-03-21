@@ -15,14 +15,14 @@ import net.proteanit.sql.DbUtils;
  *
  * @author supark
  */
-public class firstPage extends javax.swing.JFrame {
+public class afterLogMain1 extends javax.swing.JFrame {
 
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    private static String gettingISBNValue2 = "";
+    private static int getIsbn;
     
-    public firstPage() {
+    public afterLogMain1() {
         initComponents();
         con = connsql.ConnecrDB();
         fetch();
@@ -34,22 +34,14 @@ public class firstPage extends javax.swing.JFrame {
             rs = pst.executeQuery();
             
             mainTable.setModel(DbUtils.resultSetToTableModel(rs));
-            
+            pst.close();
+            rs.close();
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
-        finally {
-            try {
-                pst.close();
-                rs.close();
-                con.close();
-            }
-            catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,36 +52,36 @@ public class firstPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        loginBtn = new javax.swing.JButton();
-        signupBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        logOutBtn = new javax.swing.JButton();
+        myAcctBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         searchField = new javax.swing.JTextField();
         searchBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         mainTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Main");
 
-        loginBtn.setText("Log-In");
-        loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel1.setText("logo");
+
+        logOutBtn.setText("Log Out");
+        logOutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginBtnMouseClicked(evt);
+                logOutBtnMouseClicked(evt);
             }
         });
 
-        signupBtn.setText("Sign-Up");
-        signupBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        myAcctBtn.setText("My Acct");
+        myAcctBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                signupBtnMouseClicked(evt);
+                myAcctBtnMouseClicked(evt);
             }
         });
 
-        jLabel1.setText("ISBN Search : ");
+        jLabel2.setText("ISBN Serarch : ");
 
-        searchField.setText("only 13 digits");
-
-        searchBtn.setText("Search");
+        searchBtn.setText("SEARCH");
         searchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 searchBtnMouseClicked(evt);
@@ -98,6 +90,17 @@ public class firstPage extends javax.swing.JFrame {
 
         mainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -118,39 +121,43 @@ public class firstPage extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(loginBtn)
-                .addGap(20, 20, 20)
-                .addComponent(signupBtn)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(myAcctBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                        .addComponent(searchBtn)))
-                .addGap(29, 29, 29))
+                        .addComponent(logOutBtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchBtn)
+                        .addGap(0, 3, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginBtn)
-                    .addComponent(signupBtn))
-                .addGap(57, 57, 57)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchBtn))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(89, 89, 89)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchBtn)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(logOutBtn)
+                        .addComponent(myAcctBtn)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,48 +168,48 @@ public class firstPage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-        // TODO add your handling code here:
+    private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
         this.dispose();
-        new login().setVisible(true);
-    }//GEN-LAST:event_loginBtnMouseClicked
+        new firstPage().setVisible(true);
+    }//GEN-LAST:event_logOutBtnMouseClicked
 
-    private void signupBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signupBtnMouseClicked
-        // TODO add your handling code here:
+    private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
+        int row = mainTable.getSelectedRow();     
+        String to =mainTable.getModel().getValueAt(row, 0).toString();
+        getIsbn = Integer.valueOf(to);;
+       
         this.dispose();
-        new signup().setVisible(true);
-    }//GEN-LAST:event_signupBtnMouseClicked
+        new displayABookAfterLogin().setVisible(true);
+    }//GEN-LAST:event_mainTableMouseClicked
 
     private void searchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchBtnMouseClicked
-        // TODO add your handling code here:
         String search_field = searchField.getText();
-        gettingISBNValue2 = search_field;
+        getIsbn = Integer.valueOf(search_field);
+        
         
         this.dispose();
         new displayBookInfoWOLogin().setVisible(true);
     }//GEN-LAST:event_searchBtnMouseClicked
 
-    private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
-        // TODO add your handling code here:
-        int row = mainTable.getSelectedRow();     
-        String to =mainTable.getModel().getValueAt(row, 0).toString();
-        gettingISBNValue2 = to;
-       
-        this.dispose();
-        new displayBookInfoWOLogin().setVisible(true);
-    }//GEN-LAST:event_mainTableMouseClicked
-
-    public static String getValue() {
-        return gettingISBNValue2;
-    }
+    private void myAcctBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myAcctBtnMouseClicked
+       this.dispose();
+        new myAccount().setVisible(true);
+    }//GEN-LAST:event_myAcctBtnMouseClicked
     
+    public static int getValue() {
+        return getIsbn;
+    }
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -217,32 +224,33 @@ public class firstPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(firstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(afterLogMain1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(firstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(afterLogMain1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(firstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(afterLogMain1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(firstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(afterLogMain1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new firstPage().setVisible(true);
+                new afterLogMain1().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton loginBtn;
+    private javax.swing.JButton logOutBtn;
     private javax.swing.JTable mainTable;
+    private javax.swing.JButton myAcctBtn;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchField;
-    private javax.swing.JButton signupBtn;
     // End of variables declaration//GEN-END:variables
 }
