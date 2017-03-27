@@ -20,7 +20,7 @@ public class myAccount extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    private static String gettingISBNValue = "";
+    private static int gettingISBNValue;
     
     public myAccount() {
         initComponents();
@@ -29,7 +29,7 @@ public class myAccount extends javax.swing.JFrame {
     }
 public void fetch() {
     String to = login.getValue();  //This value is login ID
-        System.out.println(to);
+        //System.out.println(to);
         
         try{ 
             String q = "SELECT isbn, price, condition, desc FROM openInventory3 WHERE seller= '"+to+"' ";
@@ -39,6 +39,7 @@ public void fetch() {
             openInvenTable.setModel(DbUtils.resultSetToTableModel(rs));
             pst.close();
             rs.close();
+            con.close();
         }
         catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -297,13 +298,14 @@ public void fetch() {
     private void openInvenTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openInvenTableMouseClicked
         int row = openInvenTable.getSelectedRow();     
         String to =openInvenTable.getModel().getValueAt(row, 0).toString();
-        gettingISBNValue = to;
+        gettingISBNValue = Integer.valueOf(to);
+        
        
         this.dispose();
-        new displayBookInfoWOLogin().setVisible(true);
+        new viewDetailFromMyAccSell().setVisible(true);
     }//GEN-LAST:event_openInvenTableMouseClicked
     
-    public static String getValue() {
+    public static int getValue() {
         return gettingISBNValue;
     }
     /**

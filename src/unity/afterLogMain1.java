@@ -174,6 +174,7 @@ public class afterLogMain1 extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
@@ -196,7 +197,7 @@ public class afterLogMain1 extends javax.swing.JFrame {
         
         
         this.dispose();
-        new displayBookInfoWOLogin().setVisible(true);
+        new displayABookAfterLogin().setVisible(true);
     }//GEN-LAST:event_searchBtnMouseClicked
 
     private void myAcctBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myAcctBtnMouseClicked

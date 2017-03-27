@@ -28,7 +28,7 @@ public class bookInfo extends javax.swing.JFrame {
     }
     public void fetch() {
     int too = displayABookAfterLogin.getValue();
-        System.out.println(too);
+        //System.out.println(too);
         
         
         try{
@@ -56,8 +56,7 @@ public class bookInfo extends javax.swing.JFrame {
                 String des = rs.getString("desc");          
                 String selle = rs.getString("seller");
                 
-                
-                priceField.setText(""+ pric);
+                priceField.setText("" + pric);
                 conditionField.setText(conditio);
                 descArea.setText(des);
                 
@@ -67,11 +66,13 @@ public class bookInfo extends javax.swing.JFrame {
             
             pst.close();
             rs.close();
+            con.close();
            
         }
         catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+        
     }
 
     /**
@@ -106,6 +107,8 @@ public class bookInfo extends javax.swing.JFrame {
         myAcctBtn = new javax.swing.JButton();
         myCartBtn = new javax.swing.JButton();
         logOutBtn = new javax.swing.JButton();
+        goBackBtn = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Book Information");
@@ -131,6 +134,11 @@ public class bookInfo extends javax.swing.JFrame {
         jScrollPane1.setViewportView(descArea);
 
         addCartBtn.setText("Add to cart");
+        addCartBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addCartBtnMouseClicked(evt);
+            }
+        });
         addCartBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addCartBtnActionPerformed(evt);
@@ -165,6 +173,15 @@ public class bookInfo extends javax.swing.JFrame {
             }
         });
 
+        goBackBtn.setText("Go Back");
+        goBackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goBackBtnMouseClicked(evt);
+            }
+        });
+
+        jLabel9.setText("$");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -183,10 +200,15 @@ public class bookInfo extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel6))
-                                .addGap(34, 34, 34)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sellerField, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(sellerField, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(269, 269, 269)
                                 .addComponent(addCartBtn))
@@ -225,6 +247,8 @@ public class bookInfo extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(homeBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(goBackBtn)
+                        .addGap(105, 105, 105)
                         .addComponent(myAcctBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(myCartBtn)
@@ -239,7 +263,8 @@ public class bookInfo extends javax.swing.JFrame {
                     .addComponent(homeBtn)
                     .addComponent(myAcctBtn)
                     .addComponent(myCartBtn)
-                    .addComponent(logOutBtn))
+                    .addComponent(logOutBtn)
+                    .addComponent(goBackBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -263,7 +288,8 @@ public class bookInfo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -322,6 +348,16 @@ public class bookInfo extends javax.swing.JFrame {
         new afterLogMain1().setVisible(true);
     }//GEN-LAST:event_homeBtnMouseClicked
 
+    private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
+        this.dispose();
+        new displayABookAfterLogin().setVisible(true);
+    }//GEN-LAST:event_goBackBtnMouseClicked
+
+    private void addCartBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCartBtnMouseClicked
+        this.dispose();
+        new myCart().setVisible(true);
+    }//GEN-LAST:event_addCartBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -363,6 +399,7 @@ public class bookInfo extends javax.swing.JFrame {
     private javax.swing.JTextField conditionField;
     private javax.swing.JTextArea descArea;
     private javax.swing.JTextField editionField;
+    private javax.swing.JButton goBackBtn;
     private javax.swing.JButton homeBtn;
     private javax.swing.JTextField isbnField;
     private javax.swing.JLabel jLabel1;
@@ -373,6 +410,7 @@ public class bookInfo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logOutBtn;
