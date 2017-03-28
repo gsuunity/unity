@@ -68,7 +68,7 @@ Connection con = null;
             
             pst.close();
             rs.close();
-           
+           con.close();
         }
         catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -339,6 +339,7 @@ Connection con = null;
                 
                 pst.execute();            
                 pst.close();
+                con.close();
             
             this.dispose();
             JOptionPane.showMessageDialog(null, "Successfully edited inventory" );
@@ -354,13 +355,15 @@ Connection con = null;
        try {
            int isbn = myAccount.getValue();
            String selle = login.getValue();
+           double pric = myAccount.getprice();
             
                 String query = "DELETE FROM openInventory3 WHERE isbn = '"+isbn+"'"
-                        + " AND seller = '"+selle+"'";
+                        + " AND seller = '"+selle+"' AND price= '"+pric+"'";
                 pst = con.prepareStatement(query);
                 
                 pst.execute();            
                 pst.close();
+                con.close();
             
             this.dispose();
             JOptionPane.showMessageDialog(null, "Successfully deleted inventory" );

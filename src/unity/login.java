@@ -211,8 +211,6 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_logActionPerformed
 
     public static String getValue() {
-        String[] parts = gettingGsuEmail.split("@");
-        gettingGsuEmail = parts[0];
         return gettingGsuEmail;
     }
     

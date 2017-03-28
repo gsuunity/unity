@@ -36,6 +36,7 @@ public class afterLogMain1 extends javax.swing.JFrame {
             mainTable.setModel(DbUtils.resultSetToTableModel(rs));
             pst.close();
             rs.close();
+            con.close();
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e);

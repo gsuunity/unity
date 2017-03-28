@@ -23,6 +23,8 @@ public class displayABookAfterLogin extends javax.swing.JFrame {
     ResultSet rs2 = null;
     PreparedStatement pst2 = null;
     private static int getIsbn;
+    private static double getPrice;
+    private static String getSeller = "";
     
     public displayABookAfterLogin() {
         initComponents();
@@ -53,7 +55,7 @@ public void fetch() {
             pst.close();
             rs.close();
             
-            String q = "select isbn, price, condition, desc from openInventory3 where isbn="+ too;
+            String q = "select isbn, price, seller, condition, desc from openInventory3 where isbn="+ too;
             pst2 = con.prepareStatement(q);
             rs2 = pst2.executeQuery();
             
@@ -266,8 +268,11 @@ public void fetch() {
 
     private void OpenInvenTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpenInvenTableMouseClicked
         int row = OpenInvenTable.getSelectedRow();     
-        String to =OpenInvenTable.getModel().getValueAt(row, 0).toString(); 
-        getIsbn = Integer.valueOf(to);
+        String isbn =OpenInvenTable.getModel().getValueAt(row, 0).toString(); 
+        getIsbn = Integer.valueOf(isbn);
+        String price =OpenInvenTable.getModel().getValueAt(row, 1).toString();
+        getPrice = Double.parseDouble(price);
+        getSeller =OpenInvenTable.getModel().getValueAt(row, 2).toString();
         this.dispose();
         new bookInfo().setVisible(true);
         
@@ -293,8 +298,14 @@ public void fetch() {
         new myAccount().setVisible(true);
     }//GEN-LAST:event_MyAcctBtnMouseClicked
     
-    public static int getValue() {
+    public static int getIsb() {
         return getIsbn;
+    }
+    public static double getPric() {
+        return getPrice;
+    }
+    public static String getSelle() {
+        return getSeller;
     }
     
     public static void main(String args[]) {

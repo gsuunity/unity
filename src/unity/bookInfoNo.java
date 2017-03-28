@@ -55,6 +55,7 @@ public class bookInfoNo extends javax.swing.JFrame {
         descArea = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        cancelBtn = new javax.swing.JButton();
         dateField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         conditionField = new javax.swing.JTextField();
@@ -87,6 +88,13 @@ public class bookInfoNo extends javax.swing.JFrame {
 
         jLabel9.setText("$");
 
+        cancelBtn.setText("Cancel");
+        cancelBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -108,7 +116,9 @@ public class bookInfoNo extends javax.swing.JFrame {
                                     .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(298, 298, 298)
-                        .addComponent(jButton1)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cancelBtn)
+                            .addComponent(jButton1))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -125,7 +135,9 @@ public class bookInfoNo extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cancelBtn)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         dateField.setText("Today's date ex)11/11/17");
@@ -213,17 +225,18 @@ public class bookInfoNo extends javax.swing.JFrame {
         
         int isbn = askIsbn.getValue();
         
-        String titl = titleField.getText();
+        /*String titl = titleField.getText();
         String editio = editionField.getText();
         String autho = authorField.getText();
         String dat = dateField.getText();
         
         String conditio = conditionField.getText();
-        String pric = priceField.getText();
-        String des = descArea.getText();
+        
+        String des = descArea.getText();*/
         
         String to = login.getValue();
-         
+        String pric = priceField.getText();
+        double npric = Double.parseDouble(pric);
         try {
             
             
@@ -250,19 +263,22 @@ public class bookInfoNo extends javax.swing.JFrame {
             rs2 = pst4.executeQuery();
             
             
-                String query4 = "insert into openInventory3 (condition, price, desc, isbn, seller) values (?, ?, ?, ?, ?);";
+                String query4 = "insert into openInventory3 (condition, price, desc, isbn, seller) values "
+                        + "(?, ?, ?, ?, ?);";
                 pst3 = con.prepareStatement(query4);
                 pst3.setString(1, conditionField.getText());
-                pst3.setString(2, priceField.getText());
+                pst3.setString(2, npric + "");
                 pst3.setString(3, descArea.getText());
                 pst3.setString(4, isbn + "");
                 pst3.setString(5, to);
+                
+                
                 pst3.execute();            
                 pst3.close();
              
-            
             pst4.close();
             rs2.close();
+            con.close();
             
             this.dispose();
             JOptionPane.showMessageDialog(null, "Successfully added inventory" );
@@ -274,6 +290,11 @@ public class bookInfoNo extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void cancelBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtnMouseClicked
+        this.dispose();
+        new myAccount().setVisible(true);
+    }//GEN-LAST:event_cancelBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -312,6 +333,7 @@ public class bookInfoNo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField authorField;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField conditionField;
     private javax.swing.JTextField dateField;
     private javax.swing.JTextArea descArea;

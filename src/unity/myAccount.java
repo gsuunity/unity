@@ -21,6 +21,7 @@ public class myAccount extends javax.swing.JFrame {
     ResultSet rs = null;
     PreparedStatement pst = null;
     private static int gettingISBNValue;
+    private static double gettingPrice;
     
     public myAccount() {
         initComponents();
@@ -59,7 +60,7 @@ public void fetch() {
         jTable2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         logOutBtn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        myCartBtn = new javax.swing.JButton();
         sellBookBtn = new javax.swing.JButton();
         homeBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -94,7 +95,12 @@ public void fetch() {
             }
         });
 
-        jButton2.setText("My Cart");
+        myCartBtn.setText("My Cart");
+        myCartBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                myCartBtnMouseClicked(evt);
+            }
+        });
 
         sellBookBtn.setText("Sell Book");
         sellBookBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,7 +125,7 @@ public void fetch() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sellBookBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(myCartBtn)
                 .addGap(18, 18, 18)
                 .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -130,7 +136,7 @@ public void fetch() {
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logOutBtn)
-                    .addComponent(jButton2)
+                    .addComponent(myCartBtn)
                     .addComponent(sellBookBtn)
                     .addComponent(homeBtn)))
         );
@@ -299,14 +305,24 @@ public void fetch() {
         int row = openInvenTable.getSelectedRow();     
         String to =openInvenTable.getModel().getValueAt(row, 0).toString();
         gettingISBNValue = Integer.valueOf(to);
+        String price =openInvenTable.getModel().getValueAt(row, 1).toString();
+        gettingPrice = Double.parseDouble(price);
         
        
         this.dispose();
         new viewDetailFromMyAccSell().setVisible(true);
     }//GEN-LAST:event_openInvenTableMouseClicked
+
+    private void myCartBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myCartBtnMouseClicked
+        this.dispose();
+        new myCart().setVisible(true);
+    }//GEN-LAST:event_myCartBtnMouseClicked
     
     public static int getValue() {
         return gettingISBNValue;
+    }
+    public static double getprice() {
+        return gettingPrice;
     }
     /**
      * @param args the command line arguments
@@ -345,7 +361,6 @@ public void fetch() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton homeBtn;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -357,6 +372,7 @@ public void fetch() {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JButton logOutBtn;
+    private javax.swing.JButton myCartBtn;
     private javax.swing.JTable openInvenTable;
     private javax.swing.JButton sellBookBtn;
     // End of variables declaration//GEN-END:variables

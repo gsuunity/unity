@@ -48,6 +48,7 @@ public class bookInfoYes extends javax.swing.JFrame {
         descArea = new javax.swing.JTextArea();
         submitBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        cancelBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("hasISBN");
@@ -70,6 +71,13 @@ public class bookInfoYes extends javax.swing.JFrame {
         });
 
         jLabel4.setText("$");
+
+        cancelBtn.setText("Cancel");
+        cancelBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,8 +102,10 @@ public class bookInfoYes extends javax.swing.JFrame {
                                         .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(298, 298, 298)
-                        .addComponent(submitBtn)))
+                        .addGap(301, 301, 301)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cancelBtn)
+                            .addComponent(submitBtn))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -114,9 +124,11 @@ public class bookInfoYes extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(submitBtn)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cancelBtn)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -137,28 +149,30 @@ public class bookInfoYes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnMouseClicked
-        // TODO add your handling code here:
-        String conditio = conditionField.getText();
+       
+        //String conditio = conditionField.getText();
         String pric = priceField.getText();
-        String des = descArea.getText();
+        double npric = Double.parseDouble(pric);
+        //String des = descArea.getText();
         
         try {
             int isb = askIsbn.getValue();
             String selle = login.getValue(); 
             
-            String query = "Select condition, price, desc from openInventory3 ";
+            String query = "Select condition, price, desc, isbn, seller from openInventory3 ";
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
             
             
                 String query2 = "insert into openInventory3 (condition, price, desc, isbn, seller) "
-                        + "values (?, ?, ?, ?, ?);";
+                        + "values (?, ?, ?, ?, ?, ?);";
                 pst2 = con.prepareStatement(query2);
                 pst2.setString(1, conditionField.getText());
-                pst2.setString(2, priceField.getText());
+                pst2.setString(2, npric + "");
                 pst2.setString(3, descArea.getText());
                 pst2.setString(4, isb+"");
                 pst2.setString(5, selle);
+                
                 pst2.execute();            
                 pst2.close();
            
@@ -176,6 +190,11 @@ public class bookInfoYes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_submitBtnMouseClicked
+
+    private void cancelBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtnMouseClicked
+        this.dispose();
+        new myAccount().setVisible(true);
+    }//GEN-LAST:event_cancelBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -213,6 +232,7 @@ public class bookInfoYes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField conditionField;
     private javax.swing.JTextArea descArea;
     private javax.swing.JLabel jLabel1;

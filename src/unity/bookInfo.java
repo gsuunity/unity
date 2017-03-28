@@ -20,6 +20,15 @@ public class bookInfo extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    PreparedStatement pst2 = null;
+    PreparedStatement pst3 = null;
+    PreparedStatement pst4 = null;
+    ResultSet rs2 = null;
+    ResultSet rs3 = null;
+    int too, isb;
+    String titl, autho, editio, conditio, des, selle;
+    double pric;
+    
     
     public bookInfo() {
         initComponents();
@@ -27,7 +36,9 @@ public class bookInfo extends javax.swing.JFrame {
         fetch();
     }
     public void fetch() {
-    int too = displayABookAfterLogin.getValue();
+    too = displayABookAfterLogin.getIsb();
+    pric = displayABookAfterLogin.getPric();
+    selle = displayABookAfterLogin.getSelle();
         //System.out.println(too);
         
         
@@ -35,26 +46,27 @@ public class bookInfo extends javax.swing.JFrame {
             String query = "select inventory.isbn, inventory.title, inventory.author, "
                     + "inventory.edition, openInventory3.price, openInventory3.condition, openInventory3.desc, "
                     + "openInventory3.seller from inventory, openInventory3 where inventory.isbn="+ too + 
-                    " AND openInventory3.isbn=" + too;
+                    " AND openInventory3.isbn=" + too + " AND openInventory3.price="+ pric + " AND "
+                    + "openInventory3.seller='"+selle+"'";
             
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
             
             if(rs.next()) {
-                int isb = rs.getInt("isbn"); 
-                String titl = rs.getString("title");
-                String autho = rs.getString("author");
-                int editio = rs.getInt("edition");
+                 isb = rs.getInt("isbn"); 
+                 titl = rs.getString("title");
+                 autho = rs.getString("author");
+                editio = rs.getString("edition");
                 
                 isbnField.setText("" + isb);  
                 titleField.setText(titl);
                 editionField.setText(""+editio);  //editio data type is integer so add ""
                 authorField.setText(autho);
                 
-                double pric = rs.getDouble("price");
-                String conditio = rs.getString("condition");
-                String des = rs.getString("desc");          
-                String selle = rs.getString("seller");
+                 pric = rs.getDouble("price");
+                conditio = rs.getString("condition");
+                des = rs.getString("desc");          
+                 selle = rs.getString("seller");
                 
                 priceField.setText("" + pric);
                 conditionField.setText(conditio);
@@ -66,7 +78,8 @@ public class bookInfo extends javax.swing.JFrame {
             
             pst.close();
             rs.close();
-            con.close();
+            
+            
            
         }
         catch(Exception e) {
@@ -135,6 +148,9 @@ public class bookInfo extends javax.swing.JFrame {
 
         addCartBtn.setText("Add to cart");
         addCartBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addCartBtnMousePressed(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addCartBtnMouseClicked(evt);
             }
@@ -265,7 +281,7 @@ public class bookInfo extends javax.swing.JFrame {
                     .addComponent(myCartBtn)
                     .addComponent(logOutBtn)
                     .addComponent(goBackBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -307,16 +323,16 @@ public class bookInfo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addGap(0, 43, Short.MAX_VALUE))
         );
 
         pack();
@@ -354,9 +370,68 @@ public class bookInfo extends javax.swing.JFrame {
     }//GEN-LAST:event_goBackBtnMouseClicked
 
     private void addCartBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCartBtnMouseClicked
-        this.dispose();
-        new myCart().setVisible(true);
+
     }//GEN-LAST:event_addCartBtnMouseClicked
+
+    private void addCartBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCartBtnMousePressed
+        String buyer = login.getValue();
+        //System.out.println(buyer);
+        //System.out.println(isb);
+        try {
+            String query1 = "Select * from cart2 where isbn=? and seller=? AND buyer=?";
+            pst4 = con.prepareStatement(query1);
+            pst4.setString(1, isb + "");
+            pst4.setString(2, selle);
+            pst4.setString(3, buyer);
+            rs3 = pst4.executeQuery();
+            int count = 0;
+            
+            while(rs3.next()){
+                count = count +1;
+            }
+            if(count == 1) {
+                JOptionPane.showMessageDialog(null, "You already added this book to your cart");
+                
+            }
+            
+            else {
+                String query = "Select isbn, seller, buyer, title, edition, author, condition, price, description"
+                    + " from cart2";
+            pst2 = con.prepareStatement(query);
+            rs2 = pst2.executeQuery();
+            
+            
+                String query2 = "insert into cart2 (isbn, seller, buyer, title, edition, author, condition, "
+                        + "price, description) values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                        
+                pst3 = con.prepareStatement(query2);
+                pst3.setString(1, isb + "");
+                pst3.setString(2, selle);
+                pst3.setString(3, buyer);
+                pst3.setString(4, titl);
+                pst3.setString(5, editio);
+                pst3.setString(6, autho);
+                pst3.setString(7, conditio);
+                pst3.setString(8, pric + "");
+                pst3.setString(9, des);
+               
+                pst3.executeUpdate();            
+                pst3.close();
+                pst2.close();
+                rs2.close();
+                con.close();
+                
+            this.dispose();
+            JOptionPane.showMessageDialog(null, "Successfully added to the cart" );
+            new myCart().setVisible(true);
+            }
+            
+            
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_addCartBtnMousePressed
 
     /**
      * @param args the command line arguments
