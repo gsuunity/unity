@@ -34,6 +34,9 @@ public class firstPage extends javax.swing.JFrame {
             rs = pst.executeQuery();
             
             mainTable.setModel(DbUtils.resultSetToTableModel(rs));
+            pst.close();
+            rs.close();
+            con.close();
             
         }
         catch (Exception e){

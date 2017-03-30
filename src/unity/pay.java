@@ -8,6 +8,7 @@ package unity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import static java.time.Instant.now;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,8 @@ Connection con = null;
     PreparedStatement pst2 = null;
     PreparedStatement pst3 = null;
     PreparedStatement pst4 = null;
+    PreparedStatement pst5 = null;
+    PreparedStatement pst6 = null;
     
     public pay() {
         initComponents();
@@ -50,6 +53,11 @@ Connection con = null;
         threeNumberField = new javax.swing.JTextField();
         submitBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        phoneField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        billingField = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Payment");
@@ -88,6 +96,10 @@ Connection con = null;
             }
         });
 
+        jLabel6.setText("TEL : ");
+
+        phoneField.setText("(   )   -");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -107,7 +119,8 @@ Connection con = null;
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -120,8 +133,9 @@ Connection con = null;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(yearCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(numberField)
-                            .addComponent(threeNumberField))))
-                .addContainerGap(56, Short.MAX_VALUE))
+                            .addComponent(threeNumberField)
+                            .addComponent(phoneField))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,22 +162,49 @@ Connection con = null;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(threeNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitBtn)
                     .addComponent(cancelBtn))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
+
+        jLabel7.setText("Billing Address : ");
+
+        billingField.setColumns(20);
+        billingField.setRows(5);
+        jScrollPane1.setViewportView(billingField);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel7)
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -186,42 +227,76 @@ Connection con = null;
        double pric = myCart.getPri();
        int isb = myCart.getIs();
        String selle = myCart.getSell();
-        System.out.println(pric);
+        System.out.println(isb);
+        System.out.println(buyer);
         
         try {
-            
-            String query = "Select * from cardInfo";
+            //insert into card information
+           String query = "Select * from cardInfo1";
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
             
             
-                String query2 = "insert into cardInfo (gsuId, name, type, number, expDate, idNumber) values "
-                        + "(?, ?, ?, ?, ?, ?);";
+                String query2 = "insert into cardInfo1 (buyer, billing, cardName, cardType, cardNumber, expDate, "
+                        + "securityNumber, phone) values "
+                        + "(?, ?, ?, ?, ?, ?, ?, ?);";
                         
                 pst2 = con.prepareStatement(query2);
                 pst2.setString(1, buyer);
-                pst2.setString(2, nameField.getText());
-                pst2.setString(3, type);
-                pst2.setString(4, numberField.getText());
-                pst2.setString(5, expDat);
-                pst2.setString(6, threeNumberField.getText());
-               
-                pst2.executeUpdate();            
+                pst2.setString(2, billingField.getText());
+                pst2.setString(3, nameField.getText());
+                pst2.setString(4, type);
+                pst2.setString(5, numberField.getText());
+                pst2.setString(6, expDat);
+                pst2.setString(7, threeNumberField.getText());
+                pst2.setString(8, phoneField.getText());
+                pst2.executeUpdate();          
          
+              //  insert into order information
+               /* String query6 = "Select * from order1";
+            pst5 = con.prepareStatement(query6);
+            rs = pst5.executeQuery();
+            
+          //here problem
+                String query5 = "insert into order1 (isbn, seller, title, edition, author, condition, price, "
+                        + "description, date, buyer) values "
+                        + "(?, ?, ?, ?, ?, ?, ?, ?, ? ,?);";
+                        
+                pst6 = con.prepareStatement(query5);
+               /* pst6.setString(1, isb+"");
+                pst6.setString(2, selle);
                 
-                String query3 = "DELETE FROM cart2 WHERE buyer = '"+buyer+"'";
+                pst6.setString(4, type);
+                pst6.setString(5, numberField.getText());
+                pst6.setString(6, expDat);
+                pst6.setString(7, threeNumberField.getText());
+                pst6.setString(8, phoneField.getText());
+               pst6.setString(1, isb+"");
+                pst6.setString(2, selle);
+                pst6.setString(3, selle);//
+                pst6.setString(4, selle);
+                pst6.setString(5, numberField.getText());
+                pst6.setString(6, expDat);
+                pst6.setString(7, pric +"");
+                pst6.setString(8, phoneField.getText());
+                pst6.setString(9, now() +"");
+                pst6.setString(10, buyer);
+                pst6.executeUpdate();  */
+                
+                //delete data in the openInventory4 table
+                
+               String query3 = "DELETE FROM openInventory4 WHER seller = '"+buyer+"' AND price='"+pric+"'";
                 pst3 = con.prepareStatement(query3);
                 
                 pst3.execute();            
                
-                  
+                //  delete data in the cart3 table
                 
-                 String query4 = "DELETE FROM openInventory3 WHERE price = '"+pric+"' AND isbn= '"+isb+"' AND "
-                         + "seller= '"+selle+"'";
+                 /*String query4 = "DELETE FROM cart3 WHERE buyer = '"+buyer+"'";
                         
                 pst4 = con.prepareStatement(query4);
                 
-                pst4.execute();   
+                pst4.execute();   */
                 
                  pst.close();
                 pst2.close();
@@ -276,16 +351,21 @@ Connection con = null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea billingField;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> monthCombo;
     private javax.swing.JTextField nameField;
     private javax.swing.JTextField numberField;
+    private javax.swing.JTextField phoneField;
     private javax.swing.JButton submitBtn;
     private javax.swing.JTextField threeNumberField;
     private javax.swing.JComboBox<String> typeCombo;

@@ -148,7 +148,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sign in to acccess.."/>
+            <Property name="text" type="java.lang.String" value="Log in to acccess.."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">

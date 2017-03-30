@@ -20,6 +20,8 @@ public class myAccount extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    ResultSet rs2 = null;
+    PreparedStatement pst2 = null;
     private static int gettingISBNValue;
     private static double gettingPrice;
     
@@ -29,17 +31,30 @@ public class myAccount extends javax.swing.JFrame {
         fetch();
     }
 public void fetch() {
-    String to = login.getValue();  //This value is login ID
+     String seller = login.getValue();
         //System.out.println(to);
         
         try{ 
-            String q = "SELECT isbn, price, condition, desc FROM openInventory3 WHERE seller= '"+to+"' ";
+            //selling jTable
+            String q = "SELECT isbn, price, condition, desc FROM openInventory4 WHERE seller= '"+seller+"' ";
             pst = con.prepareStatement(q);
             rs = pst.executeQuery();
             
             openInvenTable.setModel(DbUtils.resultSetToTableModel(rs));
             pst.close();
             rs.close();
+            
+            //track/order jTable
+            String q2 = "SELECT isbn, title, edition, author, condition, price, description, seller "
+                    + "FROM order1 WHERE buyer= '"+seller+"' ORDER BY date DESC";
+            pst2 = con.prepareStatement(q2);
+            rs2 = pst2.executeQuery();
+            
+            trackCancelTable.setModel(DbUtils.resultSetToTableModel(rs2));
+            pst.close();
+            rs.close();
+            
+            
             con.close();
         }
         catch(Exception e) {
@@ -70,7 +85,7 @@ public void fetch() {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        trackCancelTable = new javax.swing.JTable();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,18 +237,29 @@ public void fetch() {
 
         jLabel2.setText("Track / Cancel : ");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        trackCancelTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        trackCancelTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                trackCancelTableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(trackCancelTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -317,6 +343,11 @@ public void fetch() {
         this.dispose();
         new myCart().setVisible(true);
     }//GEN-LAST:event_myCartBtnMouseClicked
+
+    private void trackCancelTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trackCancelTableMouseClicked
+        this.dispose();
+        new trackCancel().setVisible(true);
+    }//GEN-LAST:event_trackCancelTableMouseClicked
     
     public static int getValue() {
         return gettingISBNValue;
@@ -370,10 +401,10 @@ public void fetch() {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JButton logOutBtn;
     private javax.swing.JButton myCartBtn;
     private javax.swing.JTable openInvenTable;
     private javax.swing.JButton sellBookBtn;
+    private javax.swing.JTable trackCancelTable;
     // End of variables declaration//GEN-END:variables
 }

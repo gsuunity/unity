@@ -12,12 +12,12 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 public class signup extends javax.swing.JFrame {
-
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
     
     PreparedStatement pst2 = null;
+    
     
     public signup() {
         con = connsql.ConnecrDB();
@@ -165,48 +165,65 @@ public class signup extends javax.swing.JFrame {
     }//GEN-LAST:event_getemailActionPerformed
 
     private void Btn_signActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_signActionPerformed
-        // TODO add your handling code here:
+        
         String mail = getemail.getText();
         String pass = getpw.getText();
         
         try {
-            String query = "Select gsuemail, pw, nicknam from log ";
+            String query = "Select gsuemail, pw, nickname from log2 ";
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
-            
-            if(mail.equals(rs.getString("gsuemail"))) {
-                JOptionPane.showMessageDialog(null, "it's already existed");
-            } 
-            if(mail != (rs.getString("gsuemail"))) {
-                if(!mail.contains("student.gsu.edu")){
-                    JOptionPane.showMessageDialog(null, "email should be gsuemail");
-                }
-                else {
-                String query2 = "insert into log (gsuemail, pw, nicknam) values (?, ?, ?);";
+            if(!(rs.next())) {
+               String query2 = "insert into log2 (gsuemail, pw, nickname) values (?, ?, ?);";
                 pst2 = con.prepareStatement(query2);
                 pst2.setString(1, getemail.getText());
                 pst2.setString(2, getpw.getText());
                 pst2.setString(3, nickname.getText());
                 pst2.execute();
                 JOptionPane.showMessageDialog(null, "successfully signed up");
+                this.dispose();            
+                new login().setVisible(true); 
+            }
+            else if(mail.equals(rs.getString("gsuemail"))) {
+                JOptionPane.showMessageDialog(null, "it's already existed");
+            } 
+            else if(mail != (rs.getString("gsuemail"))) {
+                if(!mail.contains("student.gsu.edu")){
+                    JOptionPane.showMessageDialog(null, "email should be gsuemail");
+                }
+                else {
+                String query2 = "insert into log2 (gsuemail, pw, nickname) values (?, ?, ?);";
+                pst2 = con.prepareStatement(query2);
+                pst2.setString(1, getemail.getText());
+                pst2.setString(2, getpw.getText());
+                pst2.setString(3, nickname.getText());
+                pst2.execute();
+                JOptionPane.showMessageDialog(null, "successfully signed up");
+                
                 this.dispose();
-                pst2.close();
                 new login().setVisible(true);
                 }
             }
             
             else {
+                this.dispose();
                 JOptionPane.showMessageDialog(null, " failed");
-                dispose();
+                
             }
-            pst.close();
-            rs.close();
+            //pst.close();
+            //rs.close();
+            //pst2.close();
+            con.close();
+            
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
+
     }//GEN-LAST:event_Btn_signActionPerformed
 
+    
+    
     private void getpwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_getpwKeyPressed
         // TODO add your handling code here:
         
@@ -214,12 +231,12 @@ public class signup extends javax.swing.JFrame {
 
     private void nicknameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nicknameKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        /*if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String mail = getemail.getText();
             
         
         try {
-            String query = "Select gsuemail, pw, nicknam from log ";
+            String query = "Select gsuemail, pw, nickname from log2 ";
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
             
@@ -231,7 +248,7 @@ public class signup extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "email should be gsuemail");
                 }
                 else {
-                String query2 = "insert into log (gsuemail, pw, nicknam) values (?, ?, ?);";
+                String query2 = "insert into log2 (gsuemail, pw, nickname) values (?, ?, ?);";
                 pst2 = con.prepareStatement(query2);
                 pst2.setString(1, getemail.getText());
                 pst2.setString(2, getpw.getText());
@@ -249,11 +266,12 @@ public class signup extends javax.swing.JFrame {
             }
             pst.close();
             rs.close();
+            
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
-        }
+        }*/
     }//GEN-LAST:event_nicknameKeyPressed
 
     /**

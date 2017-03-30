@@ -8,6 +8,7 @@ package unity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import static java.time.Instant.now;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,7 +47,6 @@ public class bookInfoNo extends javax.swing.JFrame {
         titleField = new javax.swing.JTextField();
         editionField = new javax.swing.JTextField();
         authorField = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -56,7 +56,6 @@ public class bookInfoNo extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         cancelBtn = new javax.swing.JButton();
-        dateField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         conditionField = new javax.swing.JTextField();
 
@@ -68,8 +67,6 @@ public class bookInfoNo extends javax.swing.JFrame {
         jLabel3.setText("Author : ");
 
         jLabel4.setText("Edition : ");
-
-        jLabel5.setText("Date :");
 
         jLabel7.setText("Price : ");
 
@@ -137,10 +134,8 @@ public class bookInfoNo extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cancelBtn)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
-
-        dateField.setText("Today's date ex)11/11/17");
 
         jLabel6.setText("Condition : ");
 
@@ -153,11 +148,7 @@ public class bookInfoNo extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(conditionField))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
@@ -167,13 +158,13 @@ public class bookInfoNo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editionField, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5))
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(authorField, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(authorField, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(conditionField, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -191,15 +182,11 @@ public class bookInfoNo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(authorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(conditionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -251,19 +238,19 @@ public class bookInfoNo extends javax.swing.JFrame {
                 pst2.setString(2, titleField.getText());
                 pst2.setString(3, authorField.getText());
                 pst2.setString(4, editionField.getText());
-                pst2.setString(5, dateField.getText());
+                pst2.setString(5, now() +"");
                 
                 pst2.executeUpdate();            
                 pst2.close();
                 pst.close();
                 rs.close();
             
-            String query3 = "Select condition, price, desc, isbn, seller from openInventory3 ";
+            String query3 = "Select condition, price, desc, isbn, seller from openInventory4 ";
             pst4 = con.prepareStatement(query3);
             rs2 = pst4.executeQuery();
             
             
-                String query4 = "insert into openInventory3 (condition, price, desc, isbn, seller) values "
+                String query4 = "insert into openInventory4 (condition, price, desc, isbn, seller) values "
                         + "(?, ?, ?, ?, ?);";
                 pst3 = con.prepareStatement(query4);
                 pst3.setString(1, conditionField.getText());
@@ -335,14 +322,12 @@ public class bookInfoNo extends javax.swing.JFrame {
     private javax.swing.JTextField authorField;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField conditionField;
-    private javax.swing.JTextField dateField;
     private javax.swing.JTextArea descArea;
     private javax.swing.JTextField editionField;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

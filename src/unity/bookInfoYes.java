@@ -159,13 +159,13 @@ public class bookInfoYes extends javax.swing.JFrame {
             int isb = askIsbn.getValue();
             String selle = login.getValue(); 
             
-            String query = "Select condition, price, desc, isbn, seller from openInventory3 ";
+            String query = "Select condition, price, desc, isbn, seller from openInventory4 ";
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
             
             
-                String query2 = "insert into openInventory3 (condition, price, desc, isbn, seller) "
-                        + "values (?, ?, ?, ?, ?, ?);";
+                String query2 = "insert into openInventory4 (condition, price, desc, isbn, seller) "
+                        + "values (?, ?, ?, ?, ?);";
                 pst2 = con.prepareStatement(query2);
                 pst2.setString(1, conditionField.getText());
                 pst2.setString(2, npric + "");

@@ -36,7 +36,7 @@ public void fetch() {
     
         try {
             String q = "Select isbn, seller, title, edition, author, condition, price, description"
-                    + " from cart2 WHERE buyer = '"+buyer+"' AND isbn= '"+isb+"' AND seller='"+selle+"'"
+                    + " from cart3 WHERE buyer = '"+buyer+"' AND isbn= '"+isb+"' AND seller='"+selle+"'"
                     + " AND price='"+pric+"'";
             pst = con.prepareStatement(q);
             rs = pst.executeQuery();
@@ -158,7 +158,7 @@ public void fetch() {
            double pric = myCart.getPri();
            String buyer = login.getValue();
             
-                String query = "DELETE FROM cart2 WHERE isbn = '"+isbn+"'"
+                String query = "DELETE FROM cart3 WHERE isbn = '"+isbn+"'"
                         + " AND seller = '"+selle+"' AND price= '"+pric+"' AND buyer = '"+buyer+"'";
                 pst2 = con.prepareStatement(query);
                 

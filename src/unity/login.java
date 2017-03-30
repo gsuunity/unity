@@ -71,7 +71,7 @@ public class login extends javax.swing.JFrame {
                 .addGap(38, 38, 38))
         );
 
-        jLabel2.setText("Sign in to acccess..");
+        jLabel2.setText("Log in to acccess..");
 
         jLabel3.setText("GSU EMAIL:");
 
@@ -179,7 +179,7 @@ public class login extends javax.swing.JFrame {
         String pass = pwTF.getText();
         String mail = emailTF.getText();
         try {
-            String query = "Select * from log where gsuemail=? and pw=? ";
+            String query = "Select * from log2 where gsuemail=? and pw=? ";
             pst = con.prepareStatement(query);
             pst.setString(1, emailTF.getText());
             pst.setString(2, pwTF.getText());
@@ -226,7 +226,7 @@ public class login extends javax.swing.JFrame {
             String pass = pwTF.getText();
             String mail = emailTF.getText();
         try {
-            String query = "Select * from log where gsuemail=? and pw=? ";
+            String query = "Select * from log2 where gsuemail=? and pw=? ";
             pst = con.prepareStatement(query);
             pst.setString(1, emailTF.getText());
             pst.setString(2, pwTF.getText());

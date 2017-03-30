@@ -55,7 +55,8 @@ public void fetch() {
             pst.close();
             rs.close();
             
-            String q = "select isbn, price, seller, condition, desc from openInventory3 where isbn="+ too;
+            String q = "select isbn, price, seller, condition, desc from openInventory4 where isbn= '"+too+"' "
+                    + "order by price";
             pst2 = con.prepareStatement(q);
             rs2 = pst2.executeQuery();
             

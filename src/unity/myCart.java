@@ -25,6 +25,7 @@ public class myCart extends javax.swing.JFrame {
     private static int getIsbn; 
     private static String getSeller="";
     private static double getPrice;
+    private static String getTitle="";
     
     public myCart() {
         initComponents();
@@ -35,15 +36,16 @@ public void fetch() {
     String buyer = login.getValue();
         try {
             String q = "Select isbn, seller, title, edition, author, condition, price, description"
-                    + " from cart2 WHERE buyer = '"+buyer+"' ";
+                    + " from cart3 WHERE buyer = '"+buyer+"' ";
             pst = con.prepareStatement(q);
             rs = pst.executeQuery();
             
             cartTable.setModel(DbUtils.resultSetToTableModel(rs));
+           
             pst.close();
             rs.close();
             
-            String q2 = "SELECT TOTAL(price) AS total_cart from cart2 WHERE buyer = '"+buyer+"' ";
+            String q2 = "SELECT TOTAL(price) AS total_cart from cart3 WHERE buyer = '"+buyer+"' ";
             pst2 = con.prepareStatement(q2);
             rs2 = pst2.executeQuery();
             
@@ -247,6 +249,8 @@ public void fetch() {
         String isbn =cartTable.getModel().getValueAt(row, 0).toString();
         getIsbn = Integer.valueOf(isbn);
         getSeller =cartTable.getModel().getValueAt(row, 1).toString();
+        //
+        
         String price =cartTable.getModel().getValueAt(row, 6).toString();
         getPrice = Double.parseDouble(price);
         
@@ -262,6 +266,7 @@ public void fetch() {
     public static double getPri() {
         return getPrice;
     }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

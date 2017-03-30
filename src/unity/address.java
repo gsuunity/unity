@@ -38,9 +38,6 @@ public class address extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         shippingField = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        billingField = new javax.swing.JTextArea();
         submitBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
 
@@ -52,12 +49,6 @@ public class address extends javax.swing.JFrame {
         shippingField.setColumns(20);
         shippingField.setRows(5);
         jScrollPane1.setViewportView(shippingField);
-
-        jLabel2.setText("Billing Address : ");
-
-        billingField.setColumns(20);
-        billingField.setRows(5);
-        jScrollPane2.setViewportView(billingField);
 
         submitBtn.setText("Submit");
         submitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -82,15 +73,9 @@ public class address extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2))))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(190, 190, 190)
                 .addComponent(submitBtn)
@@ -105,11 +90,7 @@ public class address extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(124, 124, 124)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitBtn)
                     .addComponent(cancelBtn))
@@ -149,12 +130,12 @@ public class address extends javax.swing.JFrame {
             rs5 = pst5.executeQuery();
             
             
-                String query2 = "insert into address (gsuId, shipping, billing) values (?, ?, ?);";
+                String query2 = "insert into address (buyer, shipping) values (?, ?);";
                         
                 pst6 = con1.prepareStatement(query2);
                 pst6.setString(1, buyer);
                 pst6.setString(2, shippingField.getText());
-                pst6.setString(3, billingField.getText());
+                
                
                 pst6.executeUpdate();            
                 
@@ -213,13 +194,10 @@ public class address extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea billingField;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea shippingField;
     private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables

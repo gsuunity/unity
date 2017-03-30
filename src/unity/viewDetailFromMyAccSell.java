@@ -34,9 +34,9 @@ Connection con = null;
         
         try{ 
             String query = "select inventory.isbn, inventory.title, inventory.author, "
-                    + "inventory.edition, openInventory3.price, openInventory3.condition, openInventory3.desc"
-                    + " from inventory, openInventory3 where inventory.isbn="+ is + 
-                    " AND openInventory3.isbn=" + is;
+                    + "inventory.edition, openInventory4.price, openInventory4.condition, openInventory4.desc"
+                    + " from inventory, openInventory4 where inventory.isbn="+ is + 
+                    " AND openInventory4.isbn=" + is;
             
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
@@ -68,7 +68,7 @@ Connection con = null;
             
             pst.close();
             rs.close();
-           con.close();
+           
         }
         catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -332,7 +332,7 @@ Connection con = null;
         //System.out.println(pric);
             
             
-                String query4 = "update openInventory3 set price = '"+npric+"', "
+                String query4 = "update openInventory4 set price = '"+npric+"', "
                         + "condition = '"+conditio+"', desc = '"+des+"' WHERE isbn = '"+isbn+"'"
                         + " AND seller = '"+selle+"'";
                 pst = con.prepareStatement(query4);
@@ -357,7 +357,7 @@ Connection con = null;
            String selle = login.getValue();
            double pric = myAccount.getprice();
             
-                String query = "DELETE FROM openInventory3 WHERE isbn = '"+isbn+"'"
+                String query = "DELETE FROM openInventory4 WHERE isbn = '"+isbn+"'"
                         + " AND seller = '"+selle+"' AND price= '"+pric+"'";
                 pst = con.prepareStatement(query);
                 

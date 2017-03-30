@@ -44,10 +44,10 @@ public class bookInfo extends javax.swing.JFrame {
         
         try{
             String query = "select inventory.isbn, inventory.title, inventory.author, "
-                    + "inventory.edition, openInventory3.price, openInventory3.condition, openInventory3.desc, "
-                    + "openInventory3.seller from inventory, openInventory3 where inventory.isbn="+ too + 
-                    " AND openInventory3.isbn=" + too + " AND openInventory3.price="+ pric + " AND "
-                    + "openInventory3.seller='"+selle+"'";
+                    + "inventory.edition, openInventory4.price, openInventory4.condition, openInventory4.desc, "
+                    + "openInventory4.seller from inventory, openInventory4 where inventory.isbn="+ too + 
+                    " AND openInventory4.isbn=" + too + " AND openInventory4.price="+ pric + " AND "
+                    + "openInventory4.seller='"+selle+"'";
             
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
@@ -378,7 +378,7 @@ public class bookInfo extends javax.swing.JFrame {
         //System.out.println(buyer);
         //System.out.println(isb);
         try {
-            String query1 = "Select * from cart2 where isbn=? and seller=? AND buyer=?";
+            String query1 = "Select * from cart3 where isbn=? and seller=? AND buyer=?";
             pst4 = con.prepareStatement(query1);
             pst4.setString(1, isb + "");
             pst4.setString(2, selle);
@@ -389,19 +389,19 @@ public class bookInfo extends javax.swing.JFrame {
             while(rs3.next()){
                 count = count +1;
             }
-            if(count == 1) {
+            if(count > 1) {
                 JOptionPane.showMessageDialog(null, "You already added this book to your cart");
                 
             }
             
             else {
                 String query = "Select isbn, seller, buyer, title, edition, author, condition, price, description"
-                    + " from cart2";
+                    + " from cart3";
             pst2 = con.prepareStatement(query);
             rs2 = pst2.executeQuery();
             
             
-                String query2 = "insert into cart2 (isbn, seller, buyer, title, edition, author, condition, "
+                String query2 = "insert into cart3 (isbn, seller, buyer, title, edition, author, condition, "
                         + "price, description) values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
                         
                 pst3 = con.prepareStatement(query2);

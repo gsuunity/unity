@@ -49,7 +49,7 @@ public class displayBookInfoWOLogin extends javax.swing.JFrame {
                 isbnTField.setText(""+isb);
             }
             
-            String q = "select isbn, price, condition, desc from openInventory3 where isbn="+ too;
+            String q = "select isbn, price, condition, desc from openInventory4 where isbn="+ too;
             pst = con.prepareStatement(q);
             rs = pst.executeQuery();
             

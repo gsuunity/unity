@@ -139,7 +139,7 @@ public class forgotpw extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
             try { 
-            String query = "Select * from log where gsuemail=? and nicknam=? ";
+            String query = "Select * from log2 where gsuemail=? and nickname=? ";
             pst = con.prepareStatement(query);
             pst.setString(1, emailaddress.getText());
             pst.setString(2, nickn.getText());
@@ -176,7 +176,7 @@ public class forgotpw extends javax.swing.JFrame {
 // TODO add your handling code here:
             
             try { 
-            String query = "Select * from log where gsuemail=? and nicknam=? ";
+            String query = "Select * from log2 where gsuemail=? and nickname=? ";
             pst = con.prepareStatement(query);
             pst.setString(1, emailaddress.getText());
             pst.setString(2, nickn.getText());
