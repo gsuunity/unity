@@ -17,13 +17,10 @@ import javax.swing.JOptionPane;
  */
 public class pay extends javax.swing.JFrame {
 Connection con = null;
-    ResultSet rs = null;
+    
     PreparedStatement pst = null;
     PreparedStatement pst2 = null;
-    PreparedStatement pst3 = null;
-    PreparedStatement pst4 = null;
-    PreparedStatement pst5 = null;
-    PreparedStatement pst6 = null;
+    
     
     public pay() {
         initComponents();
@@ -217,93 +214,27 @@ Connection con = null;
     }//GEN-LAST:event_cancelBtnMouseClicked
 
     private void submitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnMouseClicked
-       String buyer = login.getValue();
-       
-       String type = (String)typeCombo.getSelectedItem(); 
-       String month = (String)monthCombo.getSelectedItem();
-       String year = (String)yearCombo.getSelectedItem();
-       String expDat = month + "/" + year;
-       
-       double pric = myCart.getPri();
-       int isb = myCart.getIs();
-       String selle = myCart.getSell();
-        System.out.println(isb);
-        System.out.println(buyer);
+       String buye = login.getValue();
+        String sold = "sold" + login.getValue();
         
+       
         try {
-            //insert into card information
-           String query = "Select * from cardInfo1";
-            pst = con.prepareStatement(query);
-            rs = pst.executeQuery();
+            String query1 = "DELETE FROM openInventory4 WHERE EXISTS (SELECT isbn, price seller FROM cart3 WHERE "
+                    + "buyer = '"
+                    +buye+"')";
+                pst2 = con.prepareStatement(query1);
+                
+                pst2.execute();  
             
             
-                String query2 = "insert into cardInfo1 (buyer, billing, cardName, cardType, cardNumber, expDate, "
-                        + "securityNumber, phone) values "
-                        + "(?, ?, ?, ?, ?, ?, ?, ?);";
-                        
-                pst2 = con.prepareStatement(query2);
-                pst2.setString(1, buyer);
-                pst2.setString(2, billingField.getText());
-                pst2.setString(3, nameField.getText());
-                pst2.setString(4, type);
-                pst2.setString(5, numberField.getText());
-                pst2.setString(6, expDat);
-                pst2.setString(7, threeNumberField.getText());
-                pst2.setString(8, phoneField.getText());
-                pst2.executeUpdate();          
+            
+               String query = "update cart3 set buyer = '"+sold+"' WHERE buyer = '"+buye+"'";
+                pst = con.prepareStatement(query); 
+                pst.execute();   
          
-              //  insert into order information
-               /* String query6 = "Select * from order1";
-            pst5 = con.prepareStatement(query6);
-            rs = pst5.executeQuery();
-            
-          //here problem
-                String query5 = "insert into order1 (isbn, seller, title, edition, author, condition, price, "
-                        + "description, date, buyer) values "
-                        + "(?, ?, ?, ?, ?, ?, ?, ?, ? ,?);";
-                        
-                pst6 = con.prepareStatement(query5);
-               /* pst6.setString(1, isb+"");
-                pst6.setString(2, selle);
-                
-                pst6.setString(4, type);
-                pst6.setString(5, numberField.getText());
-                pst6.setString(6, expDat);
-                pst6.setString(7, threeNumberField.getText());
-                pst6.setString(8, phoneField.getText());
-               pst6.setString(1, isb+"");
-                pst6.setString(2, selle);
-                pst6.setString(3, selle);//
-                pst6.setString(4, selle);
-                pst6.setString(5, numberField.getText());
-                pst6.setString(6, expDat);
-                pst6.setString(7, pric +"");
-                pst6.setString(8, phoneField.getText());
-                pst6.setString(9, now() +"");
-                pst6.setString(10, buyer);
-                pst6.executeUpdate();  */
-                
-                //delete data in the openInventory4 table
-                
-               String query3 = "DELETE FROM openInventory4 WHER seller = '"+buyer+"' AND price='"+pric+"'";
-                pst3 = con.prepareStatement(query3);
-                
-                pst3.execute();            
-               
-                //  delete data in the cart3 table
-                
-                 /*String query4 = "DELETE FROM cart3 WHERE buyer = '"+buyer+"'";
-                        
-                pst4 = con.prepareStatement(query4);
-                
-                pst4.execute();   */
-                
-                 pst.close();
+              
                 pst2.close();
-                rs.close();
-                 pst3.close();
-                pst4.close();
-                
+                 pst.close();               
                 con.close();
                 
             this.dispose();
@@ -314,10 +245,7 @@ Connection con = null;
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_submitBtnMouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

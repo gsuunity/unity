@@ -8,6 +8,8 @@ package unity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import static java.time.Instant.now;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -17,8 +19,10 @@ import javax.swing.JOptionPane;
 public class address extends javax.swing.JFrame {
     Connection con1 = null;
     ResultSet rs5 = null;
+    
     PreparedStatement pst5 = null;
     PreparedStatement pst6 = null;
+    
     
     public address() {
         initComponents();
@@ -125,23 +129,24 @@ public class address extends javax.swing.JFrame {
         
         try {
             
-            String query = "Select * from address";
-            pst5 = con1.prepareStatement(query);
-            rs5 = pst5.executeQuery();
-            
-            
-                String query2 = "insert into address (buyer, shipping) values (?, ?);";
+                String query = "Select * from address";
+                pst5 = con1.prepareStatement(query);
+                rs5 = pst5.executeQuery();
+                String query2 = "insert into address (buyer, shipping, date) values (?, ?, ?);";
                         
                 pst6 = con1.prepareStatement(query2);
                 pst6.setString(1, buyer);
                 pst6.setString(2, shippingField.getText());
-                
-               
+                pst6.setString(3, now()+"");
+              
                 pst6.executeUpdate();            
-                
-                pst5.close();
+               
                 pst6.close();
+                pst5.close();
                 rs5.close();
+                
+            
+                
                 con1.close();
                 
             this.dispose();

@@ -167,7 +167,7 @@ public class signup extends javax.swing.JFrame {
     private void Btn_signActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_signActionPerformed
         
         String mail = getemail.getText();
-        String pass = getpw.getText();
+        
         
         try {
             String query = "Select gsuemail, pw, nickname from log2 ";
@@ -210,9 +210,9 @@ public class signup extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, " failed");
                 
             }
-            //pst.close();
-            //rs.close();
-            //pst2.close();
+            pst.close();
+            rs.close();
+            pst2.close();
             con.close();
             
         }

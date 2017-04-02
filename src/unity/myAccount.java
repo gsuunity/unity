@@ -22,8 +22,14 @@ public class myAccount extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs2 = null;
     PreparedStatement pst2 = null;
+    ResultSet rs3 = null;
+    PreparedStatement pst3 = null;
     private static int gettingISBNValue;
     private static double gettingPrice;
+    private static int gettingISBN;
+    private static double gettingPriceValue;
+    private static String gettingSeller;
+   
     
     public myAccount() {
         initComponents();
@@ -32,7 +38,7 @@ public class myAccount extends javax.swing.JFrame {
     }
 public void fetch() {
      String seller = login.getValue();
-        //System.out.println(to);
+        //System.out.println(seller);
         
         try{ 
             //selling jTable
@@ -45,15 +51,26 @@ public void fetch() {
             rs.close();
             
             //track/order jTable
-            String q2 = "SELECT isbn, title, edition, author, condition, price, description, seller "
-                    + "FROM order1 WHERE buyer= '"+seller+"' ORDER BY date DESC";
-            pst2 = con.prepareStatement(q2);
+            String sold = "sold" + login.getValue();
+            //System.out.println(sold);
+            String qu = "SELECT isbn, price, seller, condition, description, title, edition, author FROM cart3 WHERE "
+                    + "buyer= '"+sold+"' ORDER BY date DESC";
+            pst2 = con.prepareStatement(qu);
             rs2 = pst2.executeQuery();
             
             trackCancelTable.setModel(DbUtils.resultSetToTableModel(rs2));
-            pst.close();
-            rs.close();
+            pst2.close();
+            rs2.close();
             
+            //sold jTable
+            String que = "SELECT isbn, price, condition, description, title, edition, author FROM cart3 WHERE "
+                    + "buyer LIKE 'sold%' AND seller = '"+seller+"' ORDER BY date DESC";
+            pst3 = con.prepareStatement(que);
+            rs3 = pst3.executeQuery();
+            
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs3));
+            pst3.close();
+            rs3.close();
             
             con.close();
         }
@@ -82,10 +99,13 @@ public void fetch() {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         openInvenTable = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         trackCancelTable = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -212,29 +232,6 @@ public void fetch() {
         });
         jScrollPane1.setViewportView(openInvenTable);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         jLabel2.setText("Track / Cancel : ");
 
         trackCancelTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -261,26 +258,84 @@ public void fetch() {
         });
         jScrollPane3.setViewportView(trackCancelTable);
 
+        jLabel3.setText("Sold : ");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel2))
+                                    .addComponent(jLabel1))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)))
+            .addGap(0, 749, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+            .addGap(0, 432, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -302,7 +357,7 @@ public void fetch() {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(44, 44, 44)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -334,7 +389,6 @@ public void fetch() {
         String price =openInvenTable.getModel().getValueAt(row, 1).toString();
         gettingPrice = Double.parseDouble(price);
         
-       
         this.dispose();
         new viewDetailFromMyAccSell().setVisible(true);
     }//GEN-LAST:event_openInvenTableMouseClicked
@@ -345,6 +399,12 @@ public void fetch() {
     }//GEN-LAST:event_myCartBtnMouseClicked
 
     private void trackCancelTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trackCancelTableMouseClicked
+        int row = trackCancelTable.getSelectedRow();     
+        gettingISBN =(int) trackCancelTable.getModel().getValueAt(row, 0);
+        
+        gettingPriceValue =(double) trackCancelTable.getModel().getValueAt(row, 1);
+        gettingSeller = trackCancelTable.getModel().getValueAt(row, 2).toString();
+      
         this.dispose();
         new trackCancel().setVisible(true);
     }//GEN-LAST:event_trackCancelTableMouseClicked
@@ -355,9 +415,16 @@ public void fetch() {
     public static double getprice() {
         return gettingPrice;
     }
-    /**
-     * @param args the command line arguments
-     */
+    public static int getIsbn() {
+        return gettingISBN;
+    }
+    public static double getPriceValu() {
+        return gettingPriceValue;
+    }
+    public static String getSeller() {
+        return gettingSeller;
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -394,12 +461,15 @@ public void fetch() {
     private javax.swing.JButton homeBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JButton logOutBtn;
     private javax.swing.JButton myCartBtn;

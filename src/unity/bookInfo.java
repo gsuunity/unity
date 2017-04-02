@@ -8,6 +8,7 @@ package unity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import static java.time.Instant.now;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -402,7 +403,7 @@ public class bookInfo extends javax.swing.JFrame {
             
             
                 String query2 = "insert into cart3 (isbn, seller, buyer, title, edition, author, condition, "
-                        + "price, description) values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                        + "price, description, date) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
                         
                 pst3 = con.prepareStatement(query2);
                 pst3.setString(1, isb + "");
@@ -414,6 +415,7 @@ public class bookInfo extends javax.swing.JFrame {
                 pst3.setString(7, conditio);
                 pst3.setString(8, pric + "");
                 pst3.setString(9, des);
+                pst3.setString(10, now()+"");
                
                 pst3.executeUpdate();            
                 pst3.close();

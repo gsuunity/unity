@@ -18,8 +18,8 @@ public class trackCancel extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    
-    String buye = login.getValue(); 
+    PreparedStatement pst1 = null;
+     
     
     public trackCancel() {
         initComponents();
@@ -28,9 +28,10 @@ public class trackCancel extends javax.swing.JFrame {
     }
 
     public void fetch() {
+        String buye = login.getValue();
         
         try{
-            String query = "select shipping FROM address WHERE = '"+buye+"'";
+            String query = "select shipping FROM address WHERE buyer = '"+buye+"' ORDER BY date desc";
             
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
@@ -191,16 +192,21 @@ public class trackCancel extends javax.swing.JFrame {
 
     private void cancelOrderBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelOrderBtnMouseClicked
         try {
+            int isb = myAccount.getIsbn();
+            double pric = myAccount.getPriceValu();
+            String selle = myAccount.getSeller();
+            String buye = "sold" + login.getValue();
             
-                String query = "DELETE * FROM order1 WHERE buyer = '"+buye+"'";
-                pst = con.prepareStatement(query);
+                String query = "update cart3 set buyer = 'cancel' WHERE buyer = '"+buye+"' AND isbn = '"+isb+"'"
+                        + "AND price = '"+pric+"' AND seller = '"+selle+"'";
+                pst1 = con.prepareStatement(query); 
+                pst1.execute(); 
                 
-                pst.execute();            
-                pst.close();
+                pst1.close();
                 con.close();
             
             this.dispose();
-            JOptionPane.showMessageDialog(null, "Successfully deleted your order" );
+            JOptionPane.showMessageDialog(null, "Successfully canceled your order" );
             new myAccount().setVisible(true);
             
         }
