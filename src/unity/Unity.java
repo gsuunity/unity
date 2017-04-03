@@ -36,21 +36,21 @@ public class Unity {
             String sql5 = "CREATE TABLE address (buyer VARCHAR NOT NULL  DEFAULT (null) ,shipping TEXT NOT NULL, date "
                     + "DATETIME NOT NULL)";
             
-            String sql7 = "CREATE TABLE cardInfo1 (cardNumber INTEGER PRIMARY KEY  NOT NULL , buyer VARCHAR NOT NULL , "
+            String sql6 = "CREATE TABLE cardInfo1 (cardNumber INTEGER PRIMARY KEY  NOT NULL , buyer VARCHAR NOT NULL , "
                     + "billing TEXT NOT NULL , cardName VARCHAR NOT NULL , cardType VARCHAR NOT NULL , expDate VARCHAR "
                     + "NOT NULL , securityNumber INTEGER NOT NULL , phone VARCHAR NOT NULL )";
             
             
             try {
                 Class.forName("org.sqlite.JDBC");
-                Connection con = DriverManager.getConnection("jdbc:sqlite:/Users/supark/Documents/GitHub//gsuunity/unity/book1.sqlite");
+                Connection con = DriverManager.getConnection("jdbc:sqlite:/Users/tangher/Desktop/GitHubUnity/unity/book1.sqlite");
                 Statement stmt = con.createStatement();
                 stmt.execute(sql1);
                 stmt.execute(sql2);
                 stmt.execute(sql3);
                 stmt.execute(sql4);
                 stmt.execute(sql5);
-                stmt.execute(sql7);
+                stmt.execute(sql6);
                 
             }
             catch (Exception e) {
