@@ -15,7 +15,7 @@ public class connsql {
         try {
             Class.forName("org.sqlite.JDBC");
         Connection con = DriverManager.getConnection("jdbc:sqlite:/Users/supark/Documents/GitHub//gsuunity/unity/book1.sqlite");
-            JOptionPane.showMessageDialog(null, "connection established");
+            //JOptionPane.showMessageDialog(null, "connection established");
             return con;
         }
         catch (Exception e) {
