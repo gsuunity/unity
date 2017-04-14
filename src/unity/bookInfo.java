@@ -127,6 +127,8 @@ public class bookInfo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Book Information");
 
+        jPanel3.setBackground(new java.awt.Color(153, 153, 255));
+
         jLabel1.setText("Title : ");
 
         jLabel2.setText("Edition : ");
@@ -265,13 +267,13 @@ public class bookInfo extends javax.swing.JFrame {
                         .addComponent(homeBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(goBackBtn)
-                        .addGap(105, 105, 105)
+                        .addGap(97, 97, 97)
                         .addComponent(myAcctBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(myCartBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(logOutBtn)
-                        .addGap(27, 27, 27))))
+                        .addGap(61, 61, 61))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

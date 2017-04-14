@@ -48,6 +48,8 @@ public class address extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pay");
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         jLabel1.setText("Shipping Address : ");
 
         shippingField.setColumns(20);
@@ -79,7 +81,8 @@ public class address extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(190, 190, 190)
                 .addComponent(submitBtn)

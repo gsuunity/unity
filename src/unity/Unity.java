@@ -19,7 +19,6 @@ public class Unity {
     public static void main(String[] args) {
         
             
-            
             String sql1 = "CREATE TABLE IF NOT EXISTS log2 (gsuemail VARCHAR PRIMARY KEY NOT NULL UNIQUE, pw VARCHAR NOT NULL, "
                     + "nickname VARCHAR NOT NULL);  ";
             
@@ -37,21 +36,21 @@ public class Unity {
             String sql5 = "CREATE TABLE IF NOT EXISTS address (buyer VARCHAR NOT NULL  DEFAULT (null) ,shipping TEXT NOT NULL, date "
                     + "DATETIME NOT NULL)";
             
-            String sql7 = "CREATE TABLE IF NOT EXISTS cardInfo1 (cardNumber INTEGER PRIMARY KEY  NOT NULL , buyer VARCHAR NOT NULL , "
+            String sql6 = "CREATE TABLE IF NOT EXISTS cardInfo1 (cardNumber INTEGER PRIMARY KEY  NOT NULL , buyer VARCHAR NOT NULL , "
                     + "billing TEXT NOT NULL , cardName VARCHAR NOT NULL , cardType VARCHAR NOT NULL , expDate VARCHAR "
                     + "NOT NULL , securityNumber INTEGER NOT NULL , phone VARCHAR NOT NULL )";
             
             
             try {
                 Class.forName("org.sqlite.JDBC");
-                Connection con = DriverManager.getConnection("jdbc:sqlite:/Users/supark/Documents/GitHub//gsuunity/unity/book1.sqlite");
+                Connection con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\man78\\Documents\\NetBeansProjects\\unity-master\\book.sqlite");
                 Statement stmt = con.createStatement();
                 stmt.execute(sql1);
                 stmt.execute(sql2);
                 stmt.execute(sql3);
                 stmt.execute(sql4);
                 stmt.execute(sql5);
-                stmt.execute(sql7);
+                stmt.execute(sql6);
                 
             }
             catch (Exception e) {

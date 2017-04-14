@@ -64,6 +64,8 @@ public void fetch() {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Remove Cart");
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         removeBtn.setText("Remove this book");
         removeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

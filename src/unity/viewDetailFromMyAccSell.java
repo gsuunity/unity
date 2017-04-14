@@ -112,6 +112,8 @@ Connection con = null;
         setTitle("Book Information");
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         homeBtn.setText("Home");
         homeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

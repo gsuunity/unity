@@ -43,6 +43,8 @@ Connection con = null;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         jLabel1.setText("What is ISBN?");
 
         isbnField.addKeyListener(new java.awt.event.KeyAdapter() {

@@ -72,6 +72,8 @@ public class trackCancel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Track / Cancel");
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         homeBtn.setText("HOME");
         homeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

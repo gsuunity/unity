@@ -91,6 +91,8 @@ public class displayBookInfo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Display Book");
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         jLabel1.setText("Title :");
 
         jLabel2.setText("Author : ");
@@ -141,6 +143,8 @@ public class displayBookInfo extends javax.swing.JFrame {
                     .addComponent(isbnTField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
+
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
         OpenInvenTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

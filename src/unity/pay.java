@@ -59,6 +59,8 @@ Connection con = null;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Payment");
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         jLabel1.setText("Cardholder Name : ");
 
         jLabel2.setText("Card Type : ");

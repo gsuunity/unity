@@ -62,6 +62,8 @@ public class bookInfoNo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("No Inventory");
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         jLabel2.setText("Title : ");
 
         jLabel3.setText("Author : ");

@@ -88,6 +88,8 @@ public void fetch() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         jLabel1.setText("Title :");
 
         jLabel2.setText("Edition :");
@@ -143,6 +145,8 @@ public void fetch() {
                     .addComponent(isbnTField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
+
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
         OpenInvenTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

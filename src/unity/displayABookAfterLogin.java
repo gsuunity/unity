@@ -92,6 +92,8 @@ public void fetch() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         jLabel1.setText("Title :");
 
         jLabel2.setText("Edition :");
@@ -242,21 +244,20 @@ public void fetch() {
                         .addComponent(MyAcctBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(myCartBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(logOutBtn)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(logOutBtn)
+                        .addGap(24, 24, 24)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(homeBtn))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(logOutBtn)
-                        .addComponent(myCartBtn)
-                        .addComponent(MyAcctBtn)))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(homeBtn)
+                    .addComponent(MyAcctBtn)
+                    .addComponent(myCartBtn)
+                    .addComponent(logOutBtn))
                 .addGap(30, 30, 30)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

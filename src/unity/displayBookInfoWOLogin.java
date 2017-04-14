@@ -100,6 +100,8 @@ public class displayBookInfoWOLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Display Book");
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+
         jLabel1.setText("Title :");
 
         jLabel2.setText("Author : ");
@@ -127,7 +129,7 @@ public class displayBookInfoWOLogin extends javax.swing.JFrame {
                             .addComponent(titleTField)
                             .addComponent(editionTField, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                             .addComponent(isbnTField, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,6 +152,8 @@ public class displayBookInfoWOLogin extends javax.swing.JFrame {
                     .addComponent(isbnTField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
+
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
         OpenInvenTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -202,7 +206,7 @@ public class displayBookInfoWOLogin extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,6 +215,8 @@ public class displayBookInfoWOLogin extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel4.setBackground(new java.awt.Color(153, 153, 255));
 
         logInBtn.setText("Log In");
         logInBtn.addMouseListener(new java.awt.event.MouseAdapter() {

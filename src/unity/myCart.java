@@ -83,6 +83,8 @@ public void fetch() {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Shopping Cart");
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
+
         homeBtn.setText("Home");
         homeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
