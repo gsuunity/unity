@@ -55,9 +55,9 @@ public class bookInfoYes extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel1.setText("Condition : ");
+        jLabel1.setText("*Condition : ");
 
-        jLabel2.setText("Price : ");
+        jLabel2.setText("*Price : ");
 
         jLabel3.setText("Description : ");
 
@@ -99,8 +99,8 @@ public class bookInfoYes extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(priceField, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
                             .addComponent(conditionField)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addComponent(cancelBtn)
