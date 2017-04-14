@@ -207,7 +207,7 @@ public class signup extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "There is an account already registered under this email.");
             } 
             else if(mail != (rs.getString("gsuemail"))) {
-                if(!mail.contains("student.gsu.edu")){
+                if(!mail.contains("gsu.edu")){
                     JOptionPane.showMessageDialog(null, "Non GSU personel are not authorized to register!!");
                 }
                 else {
