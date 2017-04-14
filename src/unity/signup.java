@@ -45,6 +45,7 @@ public class signup extends javax.swing.JFrame {
         NICKNAME = new javax.swing.JLabel();
         nickname = new javax.swing.JTextField();
         label1 = new java.awt.Label();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -99,6 +100,13 @@ public class signup extends javax.swing.JFrame {
 
         label1.setText("Please enter the following information");
 
+        jButton1.setText("Cancel");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -106,20 +114,25 @@ public class signup extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(NICKNAME)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(getemail, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(nickname)
-                                .addComponent(getpw, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
-                            .addComponent(Btn_sign)))
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jButton1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btn_sign)
+                            .addGap(17, 17, 17))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(NICKNAME)
+                                .addComponent(jLabel2))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(getemail, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(nickname)
+                                    .addComponent(getpw, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))))))
+                .addContainerGap(73, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -144,9 +157,11 @@ public class signup extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NICKNAME)
                     .addComponent(nickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(Btn_sign)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Btn_sign)
+                    .addComponent(jButton1))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -184,16 +199,16 @@ public class signup extends javax.swing.JFrame {
                 pst2.setString(2, getpw.getText());
                 pst2.setString(3, nickname.getText());
                 pst2.execute();
-                JOptionPane.showMessageDialog(null, "successfully signed up");
+                JOptionPane.showMessageDialog(null, "successful.");
                 this.dispose();            
                 new login().setVisible(true); 
             }
             else if(mail.equals(rs.getString("gsuemail"))) {
-                JOptionPane.showMessageDialog(null, "it's already existed");
+                JOptionPane.showMessageDialog(null, "There is an account already registered under this email.");
             } 
             else if(mail != (rs.getString("gsuemail"))) {
                 if(!mail.contains("student.gsu.edu")){
-                    JOptionPane.showMessageDialog(null, "email should be gsuemail");
+                    JOptionPane.showMessageDialog(null, "Non GSU personel are not authorized to register!!");
                 }
                 else {
                 String query2 = "insert into log2 (gsuemail, pw, nickname) values (?, ?, ?);";
@@ -202,7 +217,7 @@ public class signup extends javax.swing.JFrame {
                 pst2.setString(2, getpw.getText());
                 pst2.setString(3, nickname.getText());
                 pst2.execute();
-                JOptionPane.showMessageDialog(null, "successfully signed up");
+                JOptionPane.showMessageDialog(null, "successful.");
                 
                 this.dispose();
                 new login().setVisible(true);
@@ -211,7 +226,7 @@ public class signup extends javax.swing.JFrame {
             
             else {
                 this.dispose();
-                JOptionPane.showMessageDialog(null, " failed");
+                JOptionPane.showMessageDialog(null, " Signup failed.");
                 
             }
             pst.close();
@@ -278,6 +293,11 @@ public class signup extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_nicknameKeyPressed
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+       this.dispose();
+        new firstPage().setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -318,6 +338,7 @@ public class signup extends javax.swing.JFrame {
     private javax.swing.JLabel NICKNAME;
     private javax.swing.JTextField getemail;
     private javax.swing.JPasswordField getpw;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -45,7 +45,7 @@ Connection con = null;
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel1.setText("What is ISBN?");
+        jLabel1.setText("Enter ISBN for the book you wish to sell.");
 
         isbnField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

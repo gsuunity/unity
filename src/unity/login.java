@@ -83,13 +83,20 @@ public class login extends javax.swing.JFrame {
         });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unity/gsu.gif"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(281, Short.MAX_VALUE)
+                .addGap(84, 84, 84)
+                .addComponent(Btn_log)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(63, 63, 63))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -97,7 +104,6 @@ public class login extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Btn_log)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -110,7 +116,7 @@ public class login extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +186,7 @@ public class login extends javax.swing.JFrame {
                 count = count +1;
             }
             if(count == 1) {
-                JOptionPane.showMessageDialog(null, "username and password is correct");
+                JOptionPane.showMessageDialog(null, "Log in sucessful. Welcome!!");
                 this.dispose();
                 gettingGsuEmail = mail;
                 new afterLogMain1().setVisible(true);
@@ -188,7 +194,7 @@ public class login extends javax.swing.JFrame {
             }
 
             else {
-                JOptionPane.showMessageDialog(null, "username or password is not correct. try again");
+                JOptionPane.showMessageDialog(null, "Username or Password is not correct. Try again!!");
             }
 
             pst.close();
@@ -217,13 +223,13 @@ public class login extends javax.swing.JFrame {
                     count = count +1;
                 }
                 if(count == 1) {
-                    JOptionPane.showMessageDialog(null, "username and password is correct");
+                    JOptionPane.showMessageDialog(null, "Log in sucessful. Welcome!!");
                     this.dispose();
 
                 }
 
                 else {
-                    JOptionPane.showMessageDialog(null, "username or password is not correct. try again");
+                    JOptionPane.showMessageDialog(null, "Username or Password is not correct. Try again!!");
                 }
 
                 pst.close();
@@ -234,6 +240,11 @@ public class login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_pwTFKeyPressed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+       this.dispose();
+        new firstPage().setVisible(true);
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     public static String getValue() {
         return gettingGsuEmail;

@@ -85,7 +85,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="What is ISBN?"/>
+            <Property name="text" type="java.lang.String" value="Enter ISBN for the book you wish to sell."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="isbnField">
