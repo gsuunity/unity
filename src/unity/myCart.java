@@ -36,7 +36,7 @@ public void fetch() {
     String buyer = login.getValue();
         try {
             String q = "Select isbn, seller, title, edition, author, condition, price, description"
-                    + " from cart3 WHERE buyer = '"+buyer+"' ";
+                    + " from cart3 WHERE buyer = '"+buyer+"' ORDER BY price";
             pst = con.prepareStatement(q);
             rs = pst.executeQuery();
             
