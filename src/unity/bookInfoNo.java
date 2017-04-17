@@ -64,15 +64,15 @@ public class bookInfoNo extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel2.setText("*Title : ");
+        jLabel2.setText("Title : ");
 
-        jLabel3.setText("*Author : ");
+        jLabel3.setText("Author : ");
 
-        jLabel4.setText("*Edition : ");
+        jLabel4.setText("Edition : ");
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel7.setText("*Price : ");
+        jLabel7.setText("Price : ");
 
         jLabel8.setText("Description : ");
 
@@ -142,7 +142,7 @@ public class bookInfoNo extends javax.swing.JFrame {
                 .addGap(45, 45, 45))
         );
 
-        jLabel6.setText("*Condition : ");
+        jLabel6.setText("Condition : ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,7 +154,7 @@ public class bookInfoNo extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(43, 43, 43)
-                        .addComponent(titleField, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE))
+                        .addComponent(titleField))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -165,7 +165,7 @@ public class bookInfoNo extends javax.swing.JFrame {
                             .addComponent(authorField, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
                             .addComponent(conditionField)
                             .addComponent(editionField))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

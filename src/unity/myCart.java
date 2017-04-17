@@ -36,7 +36,7 @@ public void fetch() {
     String buyer = login.getValue();
         try {
             String q = "Select isbn, seller, title, edition, author, condition, price, description"
-                    + " from cart3 WHERE buyer = '"+buyer+"' ORDER BY price";
+                    + " from cart3 WHERE buyer = '"+buyer+"' ";
             pst = con.prepareStatement(q);
             rs = pst.executeQuery();
             
@@ -249,7 +249,6 @@ public void fetch() {
     private void cartTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartTableMouseClicked
         int row = cartTable.getSelectedRow();     
         String isbn =cartTable.getModel().getValueAt(row, 0).toString();
-        
         getIsbn = Integer.valueOf(isbn);
         getSeller =cartTable.getModel().getValueAt(row, 1).toString();
         //
@@ -261,7 +260,6 @@ public void fetch() {
         new removeCart().setVisible(true);
     }//GEN-LAST:event_cartTableMouseClicked
     public static int getIs() {
-        
         return getIsbn;
     }
     public static String getSell() {

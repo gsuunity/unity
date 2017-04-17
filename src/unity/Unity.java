@@ -31,7 +31,7 @@ public class Unity {
             String sql4 = "CREATE TABLE IF NOT EXISTS cart3 (isbn INTEGER NOT NULL, seller VARCHAR NOT NULL, price DOUBLE NOT NULL, "
                     + "buyer VARCHAR NOT NULL, title VARCHAR NOT NULL, edition VARCHAR, author VARCHAR NOT NULL, "
                     + "condition VARCHAR NOT NULL, description TEXT, date DATETIME NOT NULL, PRIMARY KEY (isbn, seller, "
-                    + "price, buyer))";
+                    + "price))";
             
             String sql5 = "CREATE TABLE IF NOT EXISTS address (buyer VARCHAR NOT NULL  DEFAULT (null) ,shipping TEXT NOT NULL, date "
                     + "DATETIME NOT NULL)";
@@ -43,7 +43,7 @@ public class Unity {
             
             try {
                 Class.forName("org.sqlite.JDBC");
-                Connection con = DriverManager.getConnection("jdbc:sqlite:/Users/supark/Documents/GitHub//gsuunity/unity/book.sqlite");
+                Connection con = DriverManager.getConnection("jdbc:sqlite:/Users/man78/Desktop/test.sqlite");
                 Statement stmt = con.createStatement();
                 stmt.execute(sql1);
                 stmt.execute(sql2);
