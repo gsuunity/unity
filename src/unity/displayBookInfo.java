@@ -28,7 +28,7 @@ public class displayBookInfo extends javax.swing.JFrame {
         fetch();
     }
     public void fetch() {
-    String too = afterLogMain.getValue();
+    int too = afterLogMain1.getValue();
         
         
         try{
@@ -324,7 +324,7 @@ public class displayBookInfo extends javax.swing.JFrame {
 
     private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
         this.dispose();
-        new afterLogMain().setVisible(true);
+        new afterLogMain1().setVisible(true);
     }//GEN-LAST:event_homeBtnMouseClicked
 
     /**

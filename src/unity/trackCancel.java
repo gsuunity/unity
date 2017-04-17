@@ -215,6 +215,7 @@ public class trackCancel extends javax.swing.JFrame {
             String selle = myAccount.getSeller();
             String buye = "sold" + login.getValue();
             
+            
                 String query = "update cart3 set buyer = 'cancel' WHERE buyer = '"+buye+"' AND isbn = '"+isb+"'"
                         + "AND price = '"+pric+"' AND seller = '"+selle+"'";
                 pst1 = con.prepareStatement(query); 

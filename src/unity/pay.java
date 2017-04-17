@@ -221,7 +221,6 @@ Connection con = null;
     private void submitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnMouseClicked
        String buye = login.getValue();
         String sold = "sold" + login.getValue();
-        
        
         try {
             String query1 = "DELETE FROM openInventory4 WHERE EXISTS (SELECT isbn, price seller FROM cart3 WHERE "
@@ -230,10 +229,7 @@ Connection con = null;
                 pst2 = con.prepareStatement(query1);
                 
                 pst2.execute();  
-            
-            
-            
-               String query = "update cart3 set buyer = '"+sold+"' WHERE buyer = '"+buye+"'";
+             String query = "update cart3 set buyer = '"+sold+"' WHERE buyer = '"+buye+"'";
                 pst = con.prepareStatement(query); 
                 pst.execute();   
          

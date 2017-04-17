@@ -38,7 +38,9 @@ public class myAccount extends javax.swing.JFrame {
     }
 public void fetch() {
      String seller = login.getValue();
-        //System.out.println(seller);
+        int isb = myCart.getIs();
+        String selle = myCart.getSell();
+        double pric = myCart.getPri(); 
         
         try{ 
             //selling jTable

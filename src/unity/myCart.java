@@ -249,6 +249,7 @@ public void fetch() {
     private void cartTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartTableMouseClicked
         int row = cartTable.getSelectedRow();     
         String isbn =cartTable.getModel().getValueAt(row, 0).toString();
+        System.out.println(isbn);
         getIsbn = Integer.valueOf(isbn);
         getSeller =cartTable.getModel().getValueAt(row, 1).toString();
         //
@@ -260,6 +261,7 @@ public void fetch() {
         new removeCart().setVisible(true);
     }//GEN-LAST:event_cartTableMouseClicked
     public static int getIs() {
+        System.out.println(getIsbn);
         return getIsbn;
     }
     public static String getSell() {
