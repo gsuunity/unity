@@ -18,7 +18,7 @@ public class viewDetailFromMyAccSell extends javax.swing.JFrame {
 Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-   
+   PreparedStatement pst2 = null;
     
     public viewDetailFromMyAccSell() {
         initComponents();
@@ -363,8 +363,16 @@ Connection con = null;
                         + " AND seller = '"+selle+"' AND price= '"+pric+"'";
                 pst = con.prepareStatement(query);
                 
-                pst.execute();            
+                pst.execute();      
+                
+                String query1 = "DELETE FROM cart3 WHERE isbn = '"+isbn+"'"
+                        + " AND seller = '"+selle+"' AND price= '"+pric+"'";
+                pst2 = con.prepareStatement(query1);
+                
+                pst2.execute();   
+                
                 pst.close();
+                pst2.close();
                 con.close();
             
             this.dispose();
