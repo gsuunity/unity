@@ -422,7 +422,9 @@ public class bookInfo extends javax.swing.JFrame {
                 pst3.executeUpdate();            
                 pst3.close();
                 pst2.close();
+                pst4.close();
                 rs2.close();
+                rs3.close();
                 con.close();
                 
             this.dispose();
