@@ -61,9 +61,9 @@
                               <Component id="conditionField" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jScrollPane1" alignment="0" pref="671" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="677" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="71" max="32767" attributes="0"/>
+                  <EmptySpace pref="65" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
@@ -105,12 +105,12 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Condition : "/>
+            <Property name="text" type="java.lang.String" value="*Condition : "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Price : "/>
+            <Property name="text" type="java.lang.String" value="*Price : "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
