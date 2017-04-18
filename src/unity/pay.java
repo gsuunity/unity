@@ -224,9 +224,10 @@ Connection con = null;
         
        
         try {
-            String query1 = "DELETE FROM openInventory4 WHERE EXISTS (SELECT isbn, price seller FROM cart3 WHERE "
-                    + "buyer = '"
-                    +buye+"')";
+          
+            String query1 = "DELETE FROM openInventory4 WHERE EXISTS (SELECT * FROM cart3 WHERE "
+                    + "openInventory4.price = cart3.price AND openInventory4.isbn = cart3.isbn AND "
+                    + "openInventory4.seller = cart3.seller AND cart3.buyer = '"+buye+"')";
                 pst2 = con.prepareStatement(query1);
                 
                 pst2.execute();  

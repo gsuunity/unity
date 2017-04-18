@@ -381,18 +381,19 @@ public class bookInfo extends javax.swing.JFrame {
         //System.out.println(buyer);
         //System.out.println(isb);
         try {
-            String query1 = "Select * from cart3 where isbn=? and seller=? AND buyer=?";
+            String query1 = "Select * from cart3 where isbn=? and seller=? AND buyer=? AND price =?";
             pst4 = con.prepareStatement(query1);
             pst4.setString(1, isb + "");
             pst4.setString(2, selle);
             pst4.setString(3, buyer);
+            pst4.setString(4, pric + "");
             rs3 = pst4.executeQuery();
             int count = 0;
             
             while(rs3.next()){
                 count = count +1;
             }
-            if(count > 1) {
+            if(count > 3) {
                 JOptionPane.showMessageDialog(null, "You already added this book to your cart");
                 
             }
@@ -422,16 +423,18 @@ public class bookInfo extends javax.swing.JFrame {
                 pst3.executeUpdate();            
                 pst3.close();
                 pst2.close();
-                pst4.close();
+                
                 rs2.close();
-                rs3.close();
-                con.close();
+                
+                
                 
             this.dispose();
             JOptionPane.showMessageDialog(null, "Successfully added to the cart" );
             new myCart().setVisible(true);
             }
-            
+            con.close();
+            rs3.close();
+               pst4.close();
             
         }
         catch (Exception e){

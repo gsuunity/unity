@@ -14,7 +14,7 @@ public class connsql {
     public static Connection ConnecrDB() {
         try {
             Class.forName("org.sqlite.JDBC");
-        Connection con = DriverManager.getConnection("jdbc:sqlite:/Users/man78/Desktop/test.sqlite");
+        Connection con = DriverManager.getConnection("jdbc:sqlite:/Users/supark/Documents/GitHub//gsuunity/unity/book1.sqlite");
             //JOptionPane.showMessageDialog(null, "connection established");
             return con;
         }
