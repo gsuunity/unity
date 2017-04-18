@@ -66,14 +66,14 @@ public void fetch() {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
-        removeBtn.setText("Remove this book");
+        removeBtn.setText("Yes");
         removeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 removeBtnMouseClicked(evt);
             }
         });
 
-        cancelBtn.setText("Cancel");
+        cancelBtn.setText("No");
         cancelBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cancelBtnMouseClicked(evt);
@@ -113,9 +113,9 @@ public void fetch() {
                         .addGap(179, 179, 179)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
+                        .addGap(232, 232, 232)
                         .addComponent(removeBtn)
-                        .addGap(48, 48, 48)
+                        .addGap(81, 81, 81)
                         .addComponent(cancelBtn)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
