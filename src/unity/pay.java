@@ -20,7 +20,12 @@ Connection con = null;
     
     PreparedStatement pst = null;
     PreparedStatement pst2 = null;
+    PreparedStatement pst3 = null;
+    PreparedStatement pst4 = null;
+    PreparedStatement pst5 = null;
+    PreparedStatement pst6 = null;
     
+    ResultSet rs1 = null;
     
     public pay() {
         initComponents();
@@ -222,25 +227,69 @@ Connection con = null;
        String buye = login.getValue();
         String sold = "sold" + login.getValue();
         
-       
+        String type = (String)typeCombo.getSelectedItem(); 
+        String month = (String)monthCombo.getSelectedItem();
+        String year = (String)yearCombo.getSelectedItem();
+        String expDat = month + "/" + year;
+        
+        
+        
         try {
-          
-            String query1 = "DELETE FROM openInventory4 WHERE EXISTS (SELECT * FROM cart3 WHERE "
-                    + "openInventory4.price = cart3.price AND openInventory4.isbn = cart3.isbn AND "
-                    + "openInventory4.seller = cart3.seller AND cart3.buyer = '"+buye+"')";
-                pst2 = con.prepareStatement(query1);
-                
-                pst2.execute();  
-            
-            
-            
+          String query3 = "Select * from cardInfo1";
+             pst3 = con.prepareStatement(query3);
+             rs1 = pst3.executeQuery();
+ 
+            String query4 = "insert into cardInfo1 (buyer, billing, cardName, cardType, cardNumber, expDate,"
+                    + " securityNumber, phone) values "
+                         + "(?, ?, ?, ?, ?, ?, ?, ?);";
+                         
+                 pst4 = con.prepareStatement(query4);
+                 pst4.setString(1, buye);
+                 pst4.setString(2, billingField.getText());
+                 pst4.setString(3, nameField.getText());
+                 pst4.setString(4, type);
+                 pst4.setString(5, numberField.getText());
+                 pst4.setString(6, expDat);
+                 pst4.setString(7, threeNumberField.getText());
+                 pst4.setString(8, phoneField.getText());
+                 pst4.executeUpdate();          
+ 
+        
                String query = "update cart3 set buyer = '"+sold+"' WHERE buyer = '"+buye+"'";
                 pst = con.prepareStatement(query); 
                 pst.execute();   
-         
+  //              
+                
+   String query2 = "INSERT INTO pay SELECT * FROM cart3 WHERE buyer= '"+sold+"'";
+                pst5 = con.prepareStatement(query2); 
+                pst5.execute();  
               
+  //             
+                String query5 = "DELETE FROM cart3 WHERE EXISTS (SELECT * FROM pay WHERE "
+                    + "pay.price = cart3.price AND pay.isbn = cart3.isbn AND "
+                    + "pay.seller = cart3.seller AND pay.buyer = '"+sold+"')";
+                pst6 = con.prepareStatement(query5);
+                
+                pst6.execute(); 
+                
+               
+           //
+                        
+            String query1 = "DELETE FROM openInventory4 WHERE EXISTS (SELECT * FROM pay WHERE "
+                    + "openInventory4.price = pay.price AND openInventory4.isbn = pay.isbn AND "
+                    + "openInventory4.seller = pay.seller AND pay.buyer = '"+sold+"')";
+                pst2 = con.prepareStatement(query1);
+                
+                pst2.execute();  
+                 
+ //         
+                pst4.close();
                 pst2.close();
-                 pst.close();               
+                pst3.close();
+                pst5.close();
+                pst6.close();
+                 pst.close();
+                 rs1.close();
                 con.close();
                 
             this.dispose();

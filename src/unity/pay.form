@@ -93,16 +93,11 @@
                                       <Component id="numberField" pref="758" max="32767" attributes="0"/>
                                       <Component id="phoneField" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="monthCombo" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="yearCombo" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="threeNumberField" alignment="0" min="-2" pref="536" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="monthCombo" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="yearCombo" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="threeNumberField" alignment="0" min="-2" pref="536" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>

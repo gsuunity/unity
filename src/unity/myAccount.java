@@ -53,7 +53,7 @@ public void fetch() {
             //track/order jTable
             String sold = "sold" + login.getValue();
             //System.out.println(sold);
-            String qu = "SELECT isbn, price, seller, condition, description, title, edition, author FROM cart3 WHERE "
+            String qu = "SELECT isbn, price, seller, condition, description, title, edition, author FROM pay WHERE "
                     + "buyer= '"+sold+"' ORDER BY date DESC";
             pst2 = con.prepareStatement(qu);
             rs2 = pst2.executeQuery();
@@ -63,7 +63,7 @@ public void fetch() {
             rs2.close();
             
             //sold jTable
-            String que = "SELECT isbn, price, condition, description, title, edition, author FROM cart3 WHERE "
+            String que = "SELECT isbn, price, condition, description, title, edition, author FROM pay WHERE "
                     + "buyer LIKE 'sold%' AND seller = '"+seller+"' ORDER BY date DESC";
             pst3 = con.prepareStatement(que);
             rs3 = pst3.executeQuery();

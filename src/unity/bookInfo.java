@@ -393,7 +393,7 @@ public class bookInfo extends javax.swing.JFrame {
             while(rs3.next()){
                 count = count +1;
             }
-            if(count > 3) {
+            if(count > 0) {
                 JOptionPane.showMessageDialog(null, "You already added this book to your cart");
                 
             }

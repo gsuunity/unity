@@ -40,6 +40,10 @@ public class Unity {
                     + "billing TEXT NOT NULL , cardName VARCHAR NOT NULL , cardType VARCHAR NOT NULL , expDate VARCHAR "
                     + "NOT NULL , securityNumber INTEGER NOT NULL , phone VARCHAR NOT NULL )";
             
+            String sql7 = "CREATE TABLE IF NOT EXISTS pay (isbn INTEGER NOT NULL, seller VARCHAR NOT NULL, price DOUBLE NOT NULL, "
+                    + "buyer VARCHAR NOT NULL, title VARCHAR NOT NULL, edition VARCHAR, author VARCHAR NOT NULL, "
+                    + "condition VARCHAR NOT NULL, description TEXT, date DATETIME NOT NULL, PRIMARY KEY (isbn, seller, "
+                    + "price, buyer))";
             
             try {
                 Class.forName("org.sqlite.JDBC");
@@ -51,7 +55,7 @@ public class Unity {
                 stmt.execute(sql4);
                 stmt.execute(sql5);
                 stmt.execute(sql6);
-                
+                stmt.execute(sql7);
             }
             catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
