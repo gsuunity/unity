@@ -193,7 +193,7 @@ public class forgotpw extends javax.swing.JFrame {
             }
             
             else {
-                JOptionPane.showMessageDialog(null, "email or nickname is not correct. try again");
+                JOptionPane.showMessageDialog(null, "email or nickname is not correct. Please try again");
             }
             
             pst.close();

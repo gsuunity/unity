@@ -208,7 +208,7 @@ public class signup extends javax.swing.JFrame {
             } 
             else if(mail != (rs.getString("gsuemail"))) {
                 if(!mail.contains("gsu.edu")){
-                    JOptionPane.showMessageDialog(null, "Non GSU personel are not authorized to register!!");
+                    JOptionPane.showMessageDialog(null, "Non GSU personal are not authorized to register!!");
                 }
                 else {
                 String query2 = "insert into log2 (gsuemail, pw, nickname) values (?, ?, ?);";
